@@ -6,18 +6,20 @@
     "start": "node .output/server/index.mjs"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.5.0",
+    "@heroicons/vue": "^1.0.6",
+    "@nuxtjs/tailwindcss": "5.0.0-4",
+    "@tailwindcss/forms": "^0.4.0",
+    "json-api-serializer": "^2.6.6",
     "pinia": "^2.0.11"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.16.1",
-    "@iconify-json/carbon": "^1.1.1",
-    "@iconify-json/twemoji": "^1.1.0",
     "@pinia/nuxt": "^0.1.8",
-    "@unocss/nuxt": "^0.26.2",
-    "@vueuse/nuxt": "^7.6.2",
-    "eslint": "^8.9.0",
+    "@vueuse/nuxt": "^7.7.0",
+    "eslint": "^8.10.0",
     "nuxt3": "latest",
-    "typescript": "^4.5.5"
+    "typescript": "^4.6.2"
   },
   "pnpm": {
     "overrides": {
