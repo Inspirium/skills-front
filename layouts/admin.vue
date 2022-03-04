@@ -19,16 +19,17 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
+  CogIcon,
+  FolderOpenIcon,
 } from '@heroicons/vue/outline'
 import { SearchIcon } from '@heroicons/vue/solid'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
+  { name: 'Vještine', href: '/admin/skill-levels', icon: CogIcon, current: false },
+  { name: 'Sektori', href: '/admin/sectors', icon: FolderIcon, current: false },
+  { name: 'Podsektor', href: '/admin/subsectors', icon: FolderOpenIcon, current: false },
+  { name: 'Zanimanja', href: '/admin/occupations', icon: CalendarIcon, current: false },
+  { name: 'SKOMP', href: '/admin/skomp', icon: InboxIcon, current: false },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -41,7 +42,7 @@ const sidebarOpen = ref(false)
 </script>
 <template>
   <Html class="h-full bg-gray">
-  <Body class="h-full" />
+    <Body class="h-full" />
   </Html>
   <div>
     <TransitionRoot as="template" :show="sidebarOpen">
@@ -60,7 +61,7 @@ const sidebarOpen = ref(false)
               </div>
             </TransitionChild>
             <div class="flex-shrink-0 flex items-center px-4">
-              <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow" />
+              <img class="h-8 w-auto" src="@/public/logo.svg" alt="Vještine" />
             </div>
             <div class="mt-5 flex-1 h-0 overflow-y-auto">
               <nav class="px-2 space-y-1">
@@ -77,13 +78,12 @@ const sidebarOpen = ref(false)
         </div>
       </Dialog>
     </TransitionRoot>
-
     <!-- Static sidebar for desktop -->
     <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="flex-1 flex flex-col min-h-0 bg-gray-800">
-        <div class="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
-          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow" />
+        <div class="flex items-center h-28 justify-center flex-shrink-0 px-4 bg-gray-900">
+          <img class="h-16 w-auto" src="@/public/logo.svg" alt="Vještine" />
         </div>
         <div class="flex-1 flex flex-col overflow-y-auto">
           <nav class="flex-1 px-2 py-4 space-y-1">
@@ -96,51 +96,51 @@ const sidebarOpen = ref(false)
       </div>
     </div>
     <div class="md:pl-64 flex flex-col">
-      <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
-        <button type="button" class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden" @click="sidebarOpen = true">
-          <span class="sr-only">Open sidebar</span>
-          <MenuAlt2Icon class="h-6 w-6" aria-hidden="true" />
-        </button>
-        <div class="flex-1 px-4 flex justify-between">
-          <div class="flex-1 flex">
-            <form class="w-full flex md:ml-0" action="#" method="GET">
-              <label for="search-field" class="sr-only">Search</label>
-              <div class="relative w-full text-gray-400 focus-within:text-gray-600">
-                <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-                  <SearchIcon class="h-5 w-5" aria-hidden="true" />
-                </div>
-                <input id="search-field" class="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm" placeholder="Search" type="search" name="search" />
-              </div>
-            </form>
-          </div>
-          <div class="ml-4 flex items-center md:ml-6">
-            <button type="button" class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              <span class="sr-only">View notifications</span>
-              <BellIcon class="h-6 w-6" aria-hidden="true" />
-            </button>
+<!--      <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">-->
+<!--        <button type="button" class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden" @click="sidebarOpen = true">-->
+<!--          <span class="sr-only">Open sidebar</span>-->
+<!--          <MenuAlt2Icon class="h-6 w-6" aria-hidden="true" />-->
+<!--        </button>-->
+<!--        <div class="flex-1 px-4 flex justify-between">-->
+<!--          <div class="flex-1 flex">-->
+<!--            <form class="w-full flex md:ml-0" action="#" method="GET">-->
+<!--              <label for="search-field" class="sr-only">Search</label>-->
+<!--              <div class="relative w-full text-gray-400 focus-within:text-gray-600">-->
+<!--                <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">-->
+<!--                  <SearchIcon class="h-5 w-5" aria-hidden="true" />-->
+<!--                </div>-->
+<!--                <input id="search-field" class="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm" placeholder="Search" type="search" name="search" />-->
+<!--              </div>-->
+<!--            </form>-->
+<!--          </div>-->
+<!--          <div class="ml-4 flex items-center md:ml-6">-->
+<!--            <button type="button" class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">-->
+<!--              <span class="sr-only">View notifications</span>-->
+<!--              <BellIcon class="h-6 w-6" aria-hidden="true" />-->
+<!--            </button>-->
 
-            <!-- Profile dropdown -->
-            <Menu as="div" class="ml-3 relative">
-              <div>
-                <MenuButton class="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                  <span class="sr-only">Open user menu</span>
-                  <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                </MenuButton>
-              </div>
-              <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-                <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                    <a :href="item.href" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.name }}</a>
-                  </MenuItem>
-                </MenuItems>
-              </transition>
-            </Menu>
-          </div>
-        </div>
-      </div>
+<!--            &lt;!&ndash; Profile dropdown &ndash;&gt;-->
+<!--            <Menu as="div" class="ml-3 relative">-->
+<!--              <div>-->
+<!--                <MenuButton class="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">-->
+<!--                  <span class="sr-only">Open user menu</span>-->
+<!--                  <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />-->
+<!--                </MenuButton>-->
+<!--              </div>-->
+<!--              <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">-->
+<!--                <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">-->
+<!--                  <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">-->
+<!--                    <a :href="item.href" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.name }}</a>-->
+<!--                  </MenuItem>-->
+<!--                </MenuItems>-->
+<!--              </transition>-->
+<!--            </Menu>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
       <main class="flex-1">
-        <div class="py-6">
+        <div class="pb-6">
           <NuxtPage></NuxtPage>
         </div>
       </main>
