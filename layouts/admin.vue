@@ -18,18 +18,23 @@ import {
   InboxIcon,
   MenuAlt2Icon,
   UsersIcon,
-  XIcon,
+  CollectionIcon,
+  BadgeCheckIcon,
+XIcon,
   CogIcon,
   FolderOpenIcon,
 } from '@heroicons/vue/outline'
 import { SearchIcon } from '@heroicons/vue/solid'
 
 const navigation = [
-  { name: 'Vještine', href: '/admin/skill-levels', icon: CogIcon, current: false },
   { name: 'Sektori', href: '/admin/sectors', icon: FolderIcon, current: false },
   { name: 'Podsektor', href: '/admin/subsectors', icon: FolderOpenIcon, current: false },
   { name: 'Zanimanja', href: '/admin/occupations', icon: CalendarIcon, current: false },
   { name: 'SKOMP', href: '/admin/skomp', icon: InboxIcon, current: false },
+  { name: 'Izvori vještina', href: '/admin/sources', icon: MenuAlt2Icon, current: false },
+  { name: 'Razine vještina', href: '/admin/skill-levels', icon: BadgeCheckIcon, current: false },
+  { name: 'Vrste vještina', href: '/admin/skill-types', icon: CollectionIcon, current: false },
+  { name: 'Vještine', href: '/admin/skills', icon: CogIcon, current: false },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -65,7 +70,7 @@ const sidebarOpen = ref(false)
             </div>
             <div class="mt-5 flex-1 h-0 overflow-y-auto">
               <nav class="px-2 space-y-1">
-                <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']">
+                <a v-for="(item, index) in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2  font-medium rounded-md']">
                   <component :is="item.icon" :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-4 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
                   {{ item.name }}
                 </a>
@@ -87,7 +92,7 @@ const sidebarOpen = ref(false)
         </div>
         <div class="flex-1 flex flex-col overflow-y-auto">
           <nav class="flex-1 px-2 py-4 space-y-1">
-            <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']">
+            <a v-for="(item, index) in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group text-base flex items-center px-2 py-2 text-sm font-medium rounded-md']">
               <component :is="item.icon" :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
               {{ item.name }}
             </a>
