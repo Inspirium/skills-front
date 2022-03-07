@@ -52,6 +52,16 @@ function createIt() {
   })
 }
 
+function updateIt() {
+  useApiFetch(`/api/v1/sectors/${isEdit.value}`, {
+    method: 'patch',
+    body: $jsonSerializer.serialize('sectors', data.value),
+  }).then((data) => {
+    isEdit.value = null
+    loadIt()
+  })
+}
+
 function deleteIt(id) {
   useApiFetch(`/api/v1/sectors/${id}`, {
     method: 'delete',
@@ -59,6 +69,15 @@ function deleteIt(id) {
     loadIt()
     console.log(data)
   })
+}
+
+
+const isEdit = ref(null)
+function editIt(item) {
+  isEdit.value = item.id
+  data.value.name = item.name
+  data.value.color = item.color
+  data.value.icon = item.icon
 }
 
 </script>
@@ -90,7 +109,8 @@ function deleteIt(id) {
     </div>
     <div class="mt-8 flex">
       <div class="inline-flex rounded-md shadow">
-        <div @click="createIt(); data.name = ''" class="cursor-pointer inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"> Spremi </div>
+        <div v-if="!isEdit" @click="createIt(); data.name = ''" class="cursor-pointer inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"> Spremi </div>
+        <div v-else @click="updateIt(); data.name = ''" class="cursor-pointer inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"> Osvježi podatke </div>
       </div>
     </div>
   </div>
@@ -116,7 +136,10 @@ function deleteIt(id) {
                 {{ item.name }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <div @click="deleteIt(item.id)" class="cursor-pointer text-indigo-600 hover:text-indigo-900">Obriši</div>
+                <div class=" flex justify-end">
+                  <div @click="editIt(item)" class="cursor-pointer text-indigo-600 hover:text-indigo-900 mr-4">Uredi</div>
+                  <div @click="deleteIt(item.id)" class="cursor-pointer text-indigo-600 hover:text-indigo-900">Obriši</div>
+                </div>
               </td>
             </tr>
             </tbody>
