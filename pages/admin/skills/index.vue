@@ -17,20 +17,9 @@ definePageMeta({
   layout: 'admin',
 })
 
-const occupations = [
-  { id: 1, name: 'Raskužitelj štetočina' },
-  { id: 2, name: 'Energetski analitičar' },
-  { id: 3, name: 'Energetski certifikator' },
-  { id: 4, name: 'Energetski menadžer' },
-  { id: 5, name: 'Energetski menadžer za alternativna goriva' },
-]
-const skomp = [
-  { id: 1, name: '1Raskužitelj štetočina' },
-  { id: 2, name: '1Energetski analitičar' },
-  { id: 3, name: '1Energetski certifikator' },
-  { id: 4, name: '1Energetski menadžer' },
-  { id: 5, name: '1Energetski menadžer za alternativna goriva' },
-]
+const occupations = ref([])
+const skomp = ref([])
+
 const querySector = ref('')
 const selectedSector = ref()
 const filteredSector = computed(() =>
@@ -56,6 +45,7 @@ const subSector = ref([])
 const type = ref([])
 const level = ref([])
 const source = ref([])
+const skills = ref([])
 
 function loadSubSectors() {
   useApiFetch(`/api/v1/sectors/${selectedSector.value.id}`, {
@@ -99,25 +89,35 @@ function loadSource() {
     source.value = $jsonSerializer.deserialize('sources', data.data.value)
   })
 }
+
+function loadSkills() {
+  useApiFetch('/api/v1/skills', {
+  }).then((data) => {
+    skills.value = $jsonSerializer.deserialize('skills', data.data.value)
+  })
+}
+
 loadSectors()
 loadTypes()
 loadLevels()
 loadSource()
+loadSkills()
 
 const data = ref({
-  name: ''
+  name: '',
+  description: '',
 })
 const selectedType = ref({'name': 'Odaberi...'})
 const selectedLevel = ref({'name': 'Odaberi...'})
 const selectedSource = ref({'name': 'Odaberi...'})
 
-const query = ref('')
+const queryOccupation = ref('')
 const selectedOccupation = ref()
 const filteredOccupation = computed(() =>
-  query.value === ''
-      ? occupations
-      : occupations.filter((item) => {
-        return item.name.toLowerCase().includes(query.value.toLowerCase())
+    queryOccupation.value === ''
+      ? occupations.value
+      : occupations.value.filter((item) => {
+        return item.name.toLowerCase().includes(queryOccupation.value.toLowerCase())
       })
 )
 
@@ -125,8 +125,8 @@ const querySkomp = ref('')
 const selectedSkomp = ref()
 const filteredSkomp = computed(() =>
     querySkomp.value === ''
-        ? skomp
-        : skomp.filter((item) => {
+        ? skomp.value
+        : skomp.value.filter((item) => {
           return item.name.toLowerCase().includes(querySkomp.value.toLowerCase())
         })
 )
@@ -138,13 +138,30 @@ const { data: levels } = await useApiFetch('/api/v1/skills', {
 })
 
 function createIt() {
-  useApiFetch('/api/v2/departments', {
-    method: 'post',
-    body: $jsonSerializer.serialize('departments', department.value),
+  data.value.skillType = selectedType,
+  data.value.skillLevel = selectedLevel,
+  data.value.source = selectedSource,
+  data.value.occupations = occupationList,
+  data.value.clusters = skompList,
+  // data.value.sector = selectedSector,
+  // data.value.subsectors = selectedSubSector,
+  useApiFetch('/api/v1/skills', {
+    method: 'POST',
+    body: $jsonSerializer.serialize('skills', data.value),
   }).then(() => {
-    // toast.show('Uspješno je dodana novi odjel', { type: 'success' });
+    loadSkills()
   })
 }
+
+
+function loadOccupation() {
+  useApiFetch('/api/v1/occupations', {
+  }).then((data) => {
+    occupations.value = $jsonSerializer.deserialize('occupations', data.data.value)
+  })
+}
+loadOccupation()
+
 
 const occupationList = ref([])
 
@@ -156,29 +173,39 @@ function addOccupation(item) {
   if (occupationList.value.findIndex(i => i.name === item.value.name) === -1) {
     occupationList.value.push(item.value)
   }
-  query.value = ''
+  queryOccupation.value = ''
 }
 
 function removeOccupation(index) {
   occupationList.value.splice(index, 1)
 }
 
-const skromList = ref([])
+function loadSkomp() {
+  useApiFetch('/api/v1/clusters', {
+  }).then((data) => {
+    skomp.value = $jsonSerializer.deserialize('clusters', data.data.value)
+  })
+}
+loadSkomp()
 
-function addSkrom(item) {
-  if (skromList.value.findIndex(i => i.name === item.value.name) === -1) {
-    skromList.value.push(item.value)
+const skompList = ref([])
+
+function addSkomp(item) {
+  if (skompList.value.findIndex(i => i.name === item.value.name) === -1) {
+    skompList.value.push(item.value)
   }
   querySkomp.value = ''
 }
 
 function removeSkrom(index) {
-  skromList.value.splice(index, 1)
+  skompList.value.splice(index, 1)
 }
 
 watch(selectedSkomp, () => {
-  addSkrom(selectedSkomp)
+  addSkomp(selectedSkomp)
 })
+
+
 
 </script>
 
@@ -196,11 +223,11 @@ watch(selectedSkomp, () => {
 <!--    <div v-for="level in levels">{{ level.name }}</div>-->
     <div class="block text-gray-700 font-medium text-xl mb-2">
       <div class="text-3xl mb-3">Vještina</div>
-      <input v-model="data.ime" class="sm:text-lg p-3 shadow-sm focus:ring-cup-300 focus:border-cup-300 block w-full border-gray-300 border rounded-md" />
+      <input v-model="data.name" class="sm:text-lg p-3 shadow-sm focus:ring-cup-300 focus:border-cup-300 block w-full border-gray-300 border rounded-md" />
     </div>
     <div class="mt-5">
       <label for="comment" class="block text-sm font-medium text-gray-700 mb-2">Opis vještine</label>
-      <textarea rows="4" name="comment" id="comment" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" />
+      <textarea v-model="data.description" rows="4" name="comment" id="comment" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" />
     </div>
     <div class="grid grid-cols-3 gap-6">
       <Listbox as="div" v-model="selectedType" class="mt-5">
@@ -289,7 +316,7 @@ watch(selectedSkomp, () => {
       <Combobox as="div" v-model="selectedOccupation" class="mt-3">
         <ComboboxLabel class="block text-sm font-medium text-gray-700">Zanimanja</ComboboxLabel>
         <div class="relative mt-1">
-          <ComboboxInput class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" @change="query = $event.target.value" />
+          <ComboboxInput class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" @change="queryOccupation = $event.target.value" />
           <ComboboxButton class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
             <SelectorIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
           </ComboboxButton>
@@ -339,7 +366,7 @@ watch(selectedSkomp, () => {
             </ComboboxOption>
           </ComboboxOptions>
         </div>
-        <span v-for="(item, index) in skromList" :key="item.id" class="inline-flex rounded-full items-center py-0.5 pl-2.5 mt-2 mr-4 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700">
+        <span v-for="(item, index) in skompList" :key="item.id" class="inline-flex rounded-full items-center py-0.5 pl-2.5 mt-2 mr-4 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700">
           {{ item.name }}
           <button @click="removeSkrom(index)" type="button" class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white">
             <svg class="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
@@ -426,14 +453,39 @@ watch(selectedSkomp, () => {
 
     <div class="mt-8 flex">
       <div class="inline-flex rounded-md shadow">
-        <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"> Spremi </a>
+        <div @click="createIt()" class="cursor-pointer inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"> Spremi </div>
       </div>
     </div>
   </div>
-  <div class="p-8">
-    <h2 class="text-4xl font-bold tracking-tight text-gray-700 sm:text-4xl">
-      Popis vještina
-    </h2>
-
-  </div>
+    <div class="p-8">
+      <h2 class="text-2xl font-bold tracking-tight text-gray-700 sm:text-2xl">
+        Popis izvora
+      </h2>
+    </div>
+    <div class="flex flex-col px-8">
+      <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Izvor vještine</th>
+                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Akcija</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="(item, personIdx) in skills" :key="personIdx" :class="personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{ item.name }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <div @click="deleteIt(item.id)" class="cursor-pointer text-indigo-600 hover:text-indigo-900">Obriši</div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
 </template>

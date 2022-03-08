@@ -19,6 +19,7 @@ definePageMeta({
 })
 
 const data = ref({
+  id: null,
   name: '',
   color: '',
   icon: '',
@@ -54,10 +55,12 @@ function createIt() {
 
 function updateIt() {
   useApiFetch(`/api/v1/sectors/${isEdit.value}`, {
-    method: 'patch',
+    method: 'PATCH',
     body: $jsonSerializer.serialize('sectors', data.value),
-  }).then((data) => {
+  }).then(() => {
     isEdit.value = null
+    data.value.color = ''
+    data.value.icon = ''
     loadIt()
   })
 }
@@ -75,6 +78,7 @@ function deleteIt(id) {
 const isEdit = ref(null)
 function editIt(item) {
   isEdit.value = item.id
+  data.value.id = item.id
   data.value.name = item.name
   data.value.color = item.color
   data.value.icon = item.icon

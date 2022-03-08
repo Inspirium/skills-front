@@ -9,7 +9,8 @@ module.exports = {
     extend: {
       fontFamily: {
         'open': 'Open Sans',
-        'poppins': 'Poppins',
+        'dosis': 'Dosis',
+        'roboto': 'Roboto',
       },
       gridTemplateColumns: {
         'container': '1rem 1fr 1rem',

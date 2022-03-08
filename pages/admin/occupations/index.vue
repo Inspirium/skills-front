@@ -25,9 +25,6 @@ const data = ref({
 const dataFetched = ref([])
 
 const { $jsonSerializer } = useNuxtApp()
-// const { data: dataFetched } = await useApiFetch('/api/v1/sources', {
-//   parseResponse: txt => $jsonSerializer.deserialize('sources', JSON.parse(txt)),
-// })
 
 function loadIt() {
   useApiFetch('/api/v1/occupations', {
@@ -52,7 +49,6 @@ function deleteIt(id) {
     method: 'delete',
   }).then((data) => {
     loadIt()
-    console.log(data)
   })
 }
 

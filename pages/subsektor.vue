@@ -4,9 +4,6 @@ import {ref} from 'vue'
 
 const { $jsonSerializer } = useNuxtApp()
 
-const router = useRouter()
-const route = useRoute()
-
 const sectors = ref([])
 function loadIt() {
   useApiFetch('/api/v1/sectors', {
@@ -33,14 +30,15 @@ const hover = ref(null)
 <!--    <font-awesome-icon icon="tree"></font-awesome-icon>-->
     <div class="flex justify-between text-white mt-12">
       <div class="">
-        <h1 class="font-semibold sm:text-[5rem] font-dosis">Istraži vještine</h1>
+        <h1 class="font-semibold sm:text-[6rem] font-dosis">Istraži podgrupe vještine</h1>
         <h2 class="font-light sm:text-4xl font-dosis -mt-2">Neki zgodan podnaslov</h2>
       </div>
-      <p class="max-w-xl text-right"><span class="text-cyan-400 font-bold text-2xl font-dosis">Grupe vještina</span> prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale. Klasteri vještina ilustriraju novi način gledanja na tržište rada na ‘dubljoj’ razini od klasifikacije zanimanja ili kvalifikacija. Ovaj pogled pokazuje kako su vještine povezane i povezane jedna s drugom te ilustrira prenosivost vještina u različitim zanimanjima.
+      <p class="max-w-xl text-right"><span class="text-cyan-400 font-bold text-2xl font-dosis">Poljoprivreda, prehrana i veterina </span> prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale.
       </p>
     </div>
     <div class="flex flex-wrap mt-20">
-      <div v-for="(item, index) in sectors" :class="hover === index ? 'activecell bounce' : 'bounce-reverse', index === 0 || index === 10 || index === 20 ? 'ml-[6.8rem]' : ''" class="-mr-[3.2rem] w-[270px] h-[240px] relative -mb-[3.2rem] cursor-pointer transition sace" @click="router.push(`/sector/${item.id}`)" @mouseover="hover = index" @mouseleave="hover = null">
+      <div v-for="(item, index) in sectors" :class="hover === index ? 'activecell bounce' : 'bounce-reverse', index === 0 || index === 10 || index === 20 ? 'ml-[6.8rem]' : ''" class="-mr-[3.2rem] w-[270px] h-[240px] relative -mb-[3.2rem] cursor-pointer transition sace" @mouseover="hover = index" @mouseleave="hover = null">
+<!--        <p class="text-">{{ item.color }}</p>-->
         <h3 class="z-10 w-3/5 absolute text-center hex-text-center font-roboto font-medium text-lg text-gray-800 leading-6 -mt-3 transition">{{ item.name }}</h3>
         <font-awesome-icon  class="absolute hex-icon w-10 h-10 " :color="hover !== index ? `#${item.color}` : '#ffffff'" :icon="item.icon"></font-awesome-icon>
         <svg class="dropshadow z-20" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
