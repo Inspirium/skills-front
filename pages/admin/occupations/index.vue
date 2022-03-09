@@ -52,6 +52,28 @@ function deleteIt(id) {
   })
 }
 
+const querySector = ref('')
+const selectedSector = ref()
+const sectors = ref([])
+function loadSectors() {
+  useApiFetch('/api/v1/sectors/', {
+    params: {
+      'include': 'parent',
+    },
+  }).then((data) => {
+    sectors.value = $jsonSerializer.deserialize('sectors', data.data.value)
+  })
+}
+loadSectors()
+
+const filteredSector = computed(() =>
+  querySector.value === ''
+    ? sectors.value
+    : sectors.value.filter((item) => {
+      return item.name.toLowerCase().includes(querySector.value.toLowerCase())
+    })
+)
+
 </script>
 
 <template>
@@ -66,6 +88,32 @@ function deleteIt(id) {
     <div class="block text-gray-700 font-bold text-xl mb-2">
       <div class="text-3xl mb-3">Zanimanje</div>
       <input v-model="data.name" class="sm:text-lg p-3 shadow-sm focus:ring-cup-300 focus:border-cup-300 block w-full border-gray-300 border rounded-md" />
+    </div>
+
+    <div class="grid grid-cols-2 gap-6">
+      <Combobox as="div" v-model="selectedSector" class="mt-3">
+        <ComboboxLabel class="block text-sm font-medium text-gray-700">Sektor/podsektor</ComboboxLabel>
+        <div class="relative mt-1">
+          <ComboboxInput class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" @change="querySector = $event.target.value" :display-value="(sectors) => sectors.name" />
+          <ComboboxButton class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
+            <SelectorIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+          </ComboboxButton>
+
+          <ComboboxOptions v-if="sectors.length > 0" class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <ComboboxOption v-for="person in filteredSector" :key="person.id" :value="person" as="template" v-slot="{ active, selected }">
+              <li :class="['relative cursor-default select-none py-2 pl-8 pr-4', active ? 'bg-indigo-600 text-white' : 'text-gray-900']">
+            <span :class="['block truncate', selected && 'font-semibold']">
+              {{ person.name }}
+            </span>
+
+                <span v-if="selected" :class="['absolute inset-y-0 left-0 flex items-center pl-1.5', active ? 'text-white' : 'text-indigo-600']">
+              <CheckIcon class="h-5 w-5" aria-hidden="true" />
+            </span>
+              </li>
+            </ComboboxOption>
+          </ComboboxOptions>
+        </div>
+      </Combobox>
     </div>
     <div class="mt-8 flex">
       <div class="inline-flex rounded-md shadow">
