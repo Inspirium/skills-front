@@ -32,7 +32,7 @@ const hover = ref(null)
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
 <!--    <font-awesome-icon icon="tree"></font-awesome-icon>-->
     <div class="flex justify-between text-white mt-12">
-      <div class="">
+      <div class="bounce-reverse">
         <h1 class="font-semibold sm:text-[5rem] font-dosis">Istraži vještine</h1>
         <h2 class="font-light sm:text-4xl font-dosis -mt-2">Neki zgodan podnaslov</h2>
       </div>

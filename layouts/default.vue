@@ -27,13 +27,13 @@ const navigation = [
           </DisclosureButton>
         </div>
         <div class="flex-1 flex items-center justify-center sm:items-end sm:justify-start">
-          <div class="flex-shrink-0 flex items-center">
+          <NuxtLink to="/" class="flex-shrink-0 flex items-center">
             <img class="block lg:hidden h-8 w-auto" src="@/public/logo.svg" alt="Workflow" />
             <img class="hidden lg:block h-20 w-auto" src="@/public/logo.svg" alt="Workflow" />
-          </div>
+          </NuxtLink>
           <div class="hidden sm:ml-auto sm:flex items-center justify-end ">
             <div class="flex space-x-4 ">
-              <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
+              <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'text-cyan-400 font-semibold' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-lg uppercase font-medium font-dosis ']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
             </div>
           </div>
         </div>
@@ -74,11 +74,14 @@ const navigation = [
 
     <DisclosurePanel class="sm:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1">
-        <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
+        <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium font-dosis']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
       </div>
     </DisclosurePanel>
   </Disclosure>
   <div class="h-full">
     <NuxtPage></NuxtPage>
   </div>
+<!--  <div class="footer text-gray-500 text-center w-full mt-28 pb-20 uppercase leading-6 tracking-[.5rem] text-sm">-->
+<!--    <div class="p">Vještine — sva prava zadržana @2022. nešto</div>-->
+<!--  </div>-->
 </template>

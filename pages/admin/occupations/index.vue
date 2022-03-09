@@ -18,9 +18,6 @@ definePageMeta({
   layout: 'admin',
 })
 
-const data = ref({
-  name: ''
-})
 
 const dataFetched = ref([])
 
@@ -28,6 +25,9 @@ const { $jsonSerializer } = useNuxtApp()
 
 function loadIt() {
   useApiFetch('/api/v1/occupations', {
+    params: {
+      'include': 'sector'
+    },
   }).then((data) => {
     dataFetched.value = $jsonSerializer.deserialize('occupations', data.data.value)
   })
@@ -73,6 +73,11 @@ const filteredSector = computed(() =>
       return item.name.toLowerCase().includes(querySector.value.toLowerCase())
     })
 )
+
+const data = ref({
+  name: '',
+  sector: selectedSector
+})
 
 </script>
 

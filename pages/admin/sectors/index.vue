@@ -77,6 +77,7 @@ function deleteIt(id) {
 
 const isEdit = ref(null)
 function editIt(item) {
+  window.scrollTo(0,0)
   isEdit.value = item.id
   data.value.id = item.id
   data.value.name = item.name

@@ -26,16 +26,16 @@ const hover = ref(null)
 </script>
 
 <template>
-  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+  <div v-if="Object.keys(sectors).length" class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
     <!--    <font-awesome-icon icon="tree"></font-awesome-icon>-->
     <div class="flex justify-between text-white items-end mt-12">
       <div class="">
-        <h1 class="font-semibold sm:text-[5rem] font-dosis">Vještine</h1>
+        <h1 class="font-semibold sm:text-[5rem] font-dosis fly-in">Vještine</h1>
       </div>
-      <p class="max-w-xl text-right"><span class="text-cyan-400 font-bold text-2xl font-dosis">{{ sectors.name }} </span> prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale.
+      <p class="max-w-xl text-right"><span :style="`color:#${sectors.parent.color}`" class="font-bold text-2xl font-dosis">{{ sectors.name }} </span> prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale.
       </p>
     </div>
-    <div v-if="Object.keys(sectors).length"  class="flex mt-12">
+    <div class="flex mt-12">
       <div @click="router.push(`/sector/${sectors.parent.id}`)" class="relative flex cursor-pointer self-start">
         <h3 class="z-10 w-3/5 absolute text-center hex-text-center font-roboto font-medium text-2xl leading-8 transition text-white flex flex-col items-center justify-center">{{ sectors.name }}
           <font-awesome-icon class="w-14 h-14 mt-5" color="#ffffff" icon="arrow-left-long" />
@@ -46,13 +46,25 @@ const hover = ref(null)
           141.74,122.12 "/>
           <path fill-rule="evenodd" clip-rule="evenodd" :fill="`#${sectors.parent.color}`" d="M141.74,40.62L71.21,0L0,40.87v81.49l71.21,40.62l70.53-40.86
           V40.62z M71.21,4.44l67.06,38.64v77.46l-67.06,38.87L3.48,120.77V43.31L71.21,4.44z"/>
-    </svg>
+        </svg>
       </div>
-
-      <div class="flex flex-wrap">
+      <div class="w-full">
+        <div v-for="(item, index) in sectors.skills" @click="$router.push(`/sector/skill/${item.id}`)" class="font-dosis ml-16 cursor-pointer group">
+          <div v-if="index !== 0" class="container mt-2">
+            <div class="border-bottom-das"></div>
+          </div>
+          <h2 class="text-4xl font-semibold pt-3 group-hover:scale-105 origin-left transition" :style="`color:#${sectors.parent.color}`">{{ item.name }}</h2>
+          <h3 class="text-2xl font-normal py-3 text-white">{{ item.description }}</h3>
+          <ul v-if="false" class="font-roboto flex space-x-4 text-lg">
+            <li class="text-gray-500">Tip vještine: <span class="font-medium text-white">{{ item.skill_level_id }}</span></li>
+            <li class="text-gray-500">Razina vještine: <span class="font-medium text-white">{{ item.skill_type_id }}</span></li>
+            <li class="text-gray-500">Izvor: <span class="font-medium text-white">{{ item.source_id }}</span></li>
+          </ul>
+        </div>
       </div>
 
     </div>
+
   </div>
 
 </template>

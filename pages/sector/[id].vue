@@ -30,16 +30,16 @@ const hover = ref(null)
     <!--    <font-awesome-icon icon="tree"></font-awesome-icon>-->
     <div class="flex justify-between text-white items-end mt-12">
       <div class="">
-        <h1 class="font-semibold sm:text-[5rem] font-dosis">Podgrupe vještine</h1>
+        <h1 class="font-semibold sm:text-[5rem] font-dosis fly-in">Podgrupe vještine</h1>
       </div>
-      <p class="max-w-xl text-right"><span class="text-cyan-400 font-bold text-2xl font-dosis">{{ sectors.name }} </span> prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale.
+      <p class="max-w-xl text-right"><span :style="`color:#${sectors.color}`" class="font-bold text-2xl font-dosis">{{ sectors.name }} </span> prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale.
       </p>
     </div>
     <div class="flex mt-12">
       <div @click="router.push('/')" class="relative flex cursor-pointer self-start group">
         <h3 class="z-10 w-3/5 absolute text-center hex-text-center font-roboto font-medium text-2xl leading-8 transition text-white flex flex-col items-center justify-center">{{ sectors.name }}
-          <font-awesome-icon class="w-14 h-14 mt-5 transition group-hover:hidden" color="#ffffff" :icon="sectors.icon" />
-          <font-awesome-icon class="w-14 h-14 mt-5 transition hidden group-hover:flex" color="#ffffff" icon="arrow-left-long" />
+          <font-awesome-icon class="w-14 h-14 mt-5 transition group-hover:hidden transition" color="#ffffff" :icon="sectors.icon" />
+          <font-awesome-icon class="w-14 h-14 mt-5 transition hidden group-hover:flex transition" color="#ffffff" icon="arrow-left-long" />
         </h3>
         <svg class="dropshadow subhexmain" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="300px" height="380px" viewBox="0 0 141.74 162.98" xml:space="preserve">
           <polygon fill-rule="evenodd" clip-rule="evenodd" :fill="`#${sectors.color}`" class="text-white transition duration-500" points="141.74,40.62 71.21,0 0,40.87 0,122.36 71.21,162.98
@@ -61,11 +61,11 @@ const hover = ref(null)
         </div>
       </div>
       <div v-else class="w-full">
-        <div v-for="(item, index) in sectors.skills" class="text-white font-dosis ml-16 ">
-          <div v-if="index === 0" class="container mt-8">
+        <div v-for="(item, index) in sectors.skills" @click="$router.push(`/sector/skill/${item.id}`)" class="text-white font-dosis ml-16 cursor-pointer group">
+          <div v-if="index !== 0" class="container mt-8">
             <div class="border-bottom-das"></div>
           </div>
-          <h2 class="text-4xl font-semibold pt-3" :style="`color:#${sectors.color}`">{{ item.name }}</h2>
+          <h2 class="text-4xl font-semibold pt-3 text-white group-hover:scale-105 origin-left transition" :style="`color:#${sectors.color}`">{{ item.name }}</h2>
           <h3 class="text-2xl font-normal py-3">{{ item.description }}</h3>
           <ul class="font-roboto flex space-x-4 text-lg">
             <li class="text-gray-500">Tip vještine: <span class="font-medium text-white">{{ item.skill_level_id }}</span></li>

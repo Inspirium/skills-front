@@ -84,6 +84,17 @@ label {
     100%   { transform: scale(1,1)      translateY(0); }
 }
 
+.fly-in {
+    animation-name: fly-in-anim;
+    animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 1);
+    animation-duration: .25s;
+}
+
+@keyframes fly-in-anim {
+    0% { transform: scale(1.15,1.15)      translateY(-20px); }
+    100%   { transform: scale(1,1)      translateY(0); }
+}
+
 
 .hexagone {
     filter:url(#round);
@@ -94,7 +105,24 @@ label {
     height: 22rem;
 }
 
+.hexoccupation {
+    position: absolute;
+    top: -300px;
+    left: 820px;
+    z-index: -1;
+}
+
 .subhexlist {
     margin-left: -8.4rem;
     margin-top: 5.2rem;
+}
+
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
 }
