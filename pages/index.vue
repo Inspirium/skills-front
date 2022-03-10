@@ -40,12 +40,27 @@ const hover = ref(null)
 //   })
 // })
 
-// function beforeEnter(el) {
+function beforeEnter(el) {
+  el.style.opacity = 0
+  el.style.transform = 'scale(0,0)'
+}
+
+function enter(el, done) {
+  gsap.to(el, {
+    duration: 10,
+    opacity: 0,
+    scale: 1,
+    ease: 'bounce.out',
+    onComplete: done
+  })
+}
+
+// const beforeEnter = (el) => {
 //   el.style.opacity = 0
 //   el.style.transform = 'scale(0,0)'
 // }
 //
-// function enter(el, done) {
+// const enter = (el) => {
 //   gsap.to(el, {
 //     duration: 10,
 //     opacity: 1,
@@ -55,27 +70,13 @@ const hover = ref(null)
 //   })
 // }
 
-const beforeEnter = (el) => {
-  el.style.opacity = 0
-  el.style.transform = 'scale(0,0)'
-}
-
-const enter = (el) => {
-  gsap.to(el, {
-    duration: 10,
-    opacity: 1,
-    scale: 1,
-    ease: 'bounce.out',
-    onComplete: done
-  })
-}
-
 </script>
 
 <template>
+
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
 <!--    <font-awesome-icon icon="tree"></font-awesome-icon>-->
-    <transition appear @before-enter="beforeEnter" @enter="enter" >
+    <transition appear @before-enter="beforeEnter" @enter="enter">
       <div class="card"></div>
     </transition>
     <div class="flex justify-between text-white mt-12">
@@ -87,7 +88,7 @@ const enter = (el) => {
       </p>
     </div>
     <div class="flex flex-wrap mt-20">
-      <div v-for="(item, index) in sectors" :class="hover === index ? 'activecell bounce' : 'bounce-reverse', index === 0 || index === 10 || index === 20 ? 'ml-[6.8rem]' : ''" class="-mr-[3.2rem] w-[270px] h-[240px] relative -mb-[3.2rem] cursor-pointer transition sace" @click="router.push(`/sector/${item.id}`)" @mouseover="hover = index" @mouseleave="hover = null">
+      <div v-for="(item, index) in sectors" :key="index" :class="hover === index ? 'activecell bounce' : 'bounce-reverse', index === 0 || index === 10 || index === 20 ? 'ml-[6.8rem]' : ''" class="-mr-[3.2rem] w-[270px] h-[240px] relative -mb-[3.2rem] cursor-pointer transition sace" @click="router.push(`/sector/${item.id}`)" @mouseover="hover = index" @mouseleave="hover = null">
         <h3 class="z-10 w-3/5 absolute text-center hex-text-center font-roboto font-medium text-lg text-gray-800 leading-6 -mt-3 transition">{{ item.name }}</h3>
         <font-awesome-icon  class="absolute hex-icon w-10 h-10 " :color="hover !== index ? `#${item.color}` : '#ffffff'" :icon="item.icon"></font-awesome-icon>
         <svg class="dropshadow z-20" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

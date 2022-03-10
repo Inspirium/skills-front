@@ -9,6 +9,9 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/tailwindcss',
   ],
+  build: {
+    transpile: ['gsap'],
+  },
   vueuse: {
     ssrHandlers: true,
   },
