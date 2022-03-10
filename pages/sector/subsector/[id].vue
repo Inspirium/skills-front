@@ -1,6 +1,8 @@
 <script setup lang="ts">
 
 import {ref} from 'vue'
+import gsap from 'gsap'
+
 
 const router = useRouter()
 const route = useRoute()
@@ -22,6 +24,20 @@ loadIt()
 
 const hover = ref(null)
 
+function showslow1() {
+  gsap.from('.test', {
+    duration: 0.5,
+    opacity: 0,
+    scale: 0,
+    y: 200,
+    ease: 'power1',
+    stagger: {
+      from: 'edges',
+      each: 0.1
+    }
+  })
+}
+showslow1()
 
 </script>
 
@@ -49,7 +65,7 @@ const hover = ref(null)
         </svg>
       </div>
       <div class="w-full">
-        <div v-for="(item, index) in sectors.skills" @click="$router.push(`/sector/skill/${item.id}`)" class="font-dosis ml-16 cursor-pointer group">
+        <div v-for="(item, index) in sectors.skills" @click="$router.push(`/sector/skill/${item.id}`)" class="font-dosis ml-16 cursor-pointer group test">
           <div v-if="index !== 0" class="container mt-2">
             <div class="border-bottom-das"></div>
           </div>
