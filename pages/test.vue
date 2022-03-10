@@ -125,8 +125,9 @@ function showslow1() {
     },
   })
 }
-
+const show = ref(false)
 onMounted(() => {
+  show.value = true
   showslow1()
 })
 
@@ -134,7 +135,7 @@ onMounted(() => {
 
 <template>
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex">
-    <div v-for="item in sectors" :key="item.id" class="card mr-2">
+    <div v-show="show" v-for="item in sectors" :key="item.id" class="card mr-2">
       {{ item.name }}
     </div>
   </div>
