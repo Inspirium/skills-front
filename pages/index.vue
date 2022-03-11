@@ -8,64 +8,50 @@ const { $jsonSerializer } = useNuxtApp()
 const router = useRouter()
 const route = useRoute()
 
-const sectors = ref([])
-function loadIt() {
-  useApiFetch('/api/v1/sectors', {
-    params: {
-      'filter[parent]': false,
-    },
-  }).then((data) => {
-    sectors.value = $jsonSerializer.deserialize('sectors', data.data.value)
-  })
-}
-loadIt()
+const { data: sectors } = await useApiFetch('/api/v1/sectors', {
+  params: {
+    'filter[parent]': false,
+  },
+  parseResponse: txt => $jsonSerializer.deserialize('sectors', JSON.parse(txt)),
+})
 
 const test = computed(() => {
   return sectors.value.map(item => item.icon)
 })
 
 const hover = ref(null)
+const show = ref(false)
 
 onMounted(() => {
-  gasp.to('.sace', {
-    duration: 0.5,
-    opacity: 0,
-    scale: 0,
-    y: 200,
-    ease: 'power1',
-    stagger: 0.1,
-  })
+  show.value = true
+  showslow1()
 })
-
-function beforeEnter(el) {
-  el.style.opacity = 0
-  el.style.transform = 'scale(2,2)'
-}
-
-function enter(el, done) {
-  gsap.to(el, {
-    duration: 1,
-    opacity: 1,
-    scale: 1,
-    ease: 'bounce.out',
-    onComplete: done
-  })
-}
+//
+// function beforeEnter(el) {
+//   el.style.opacity = 0
+//   el.style.transform = 'scale(2,2)'
+// }
+//
+// function enter(el, done) {
+//   gsap.to(el, {
+//     duration: 1,
+//     opacity: 1,
+//     scale: 1,
+//     ease: 'bounce.out',
+//     onComplete: done
+//   })
+// }
 
 function showslow1() {
   gsap.from('.sace', {
-    duration: 0.5,
+    duration: 0.2,
     opacity: 0,
-    scale: 0,
-    y: 200,
+    scale: .5,
+    y: 100,
     ease: 'power1',
-    stagger: {
-      from: 'edges',
-      each: 0.1
-    }
+    stagger: 0.1
   })
 }
-// showslow1()
 
 
 // const beforeEnter = (el) => {
@@ -89,11 +75,11 @@ function showslow1() {
 
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
 <!--    <font-awesome-icon icon="tree"></font-awesome-icon>-->
-    <client-only>
-      <transition @before-enter="beforeEnter" @enter="enter" :css="false" appear>
-        <div class="card"></div>
-      </transition>
-    </client-only>
+<!--    <client-only>-->
+<!--      <transition @before-enter="beforeEnter" @enter="enter" :css="false" appear>-->
+<!--        <div class="card"></div>-->
+<!--      </transition>-->
+<!--    </client-only>-->
     <div class="flex justify-between text-white mt-12">
       <div class="bounce-reverse">
         <h1 class="font-semibold sm:text-[5rem] font-dosis">Istraži vještine</h1>
