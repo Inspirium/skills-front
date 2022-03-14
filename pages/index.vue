@@ -114,7 +114,7 @@ const lineBreak = computed(() => {
         <span class="text-cyan-400 font-bold text-2xl font-dosis">Grupe vještina</span> prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale. Klasteri vještina ilustriraju novi način gledanja na tržište rada na ‘dubljoj’ razini od klasifikacije zanimanja ili kvalifikacija. Ovaj pogled pokazuje kako su vještine povezane i povezane jedna s drugom te ilustrira prenosivost vještina u različitim zanimanjima.
       </p>
     </div>
-    <div v-show="show" class="flex flex-wrap mt-20">
+    <div class="flex flex-wrap mt-20">
       <div v-for="(item, index) in sectors" id="sace" :key="index" :class="[hover === index ? 'activecell bounce' : 'bounce-reverse', index % lineBreak ? '' : 'ml-[6.8rem]']" class="-mr-[3.2rem] w-[270px] h-[240px] relative -mb-[3.2rem] cursor-pointer transition sace" @click="router.push(`/sector/${item.id}`)" @mouseover="hover = index" @mouseleave="hover = null">
         <h3 class="z-10 w-3/5 absolute text-center hex-text-center font-roboto font-medium text-lg text-gray-800 leading-6 -mt-3 transition">
           {{ item.name }}
