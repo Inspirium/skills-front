@@ -29,8 +29,8 @@ const navigation = [
           </div>
           <div class="flex-1 flex items-center justify-center sm:items-end sm:justify-start">
             <NuxtLink to="/" class="flex-shrink-0 flex items-center">
-              <img class="block lg:hidden h-8 w-auto" src="@/public/logo.svg" alt="Workflow" />
-              <img class="hidden lg:block h-20 w-auto" src="@/public/logo.svg" alt="Workflow" />
+              <img class="block lg:hidden h-8 w-auto" src="/logo.svg" alt="Workflow" />
+              <img class="hidden lg:block h-20 w-auto" src="/logo.svg" alt="Workflow" />
             </NuxtLink>
             <div class="hidden sm:ml-auto sm:flex items-center justify-end ">
               <div class="flex space-x-4 ">

@@ -10,7 +10,13 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
   ],
   build: {
-    transpile: ['gsap'],
+    transpile: [
+      'gsap',
+      '@heroicons/vue',
+      '@headlessui/vue',
+      '@fortawesome/fontawesome-svg-core',
+      '@fortawesome/free-solid-svg-icons',
+    ],
   },
   vueuse: {
     ssrHandlers: true,
