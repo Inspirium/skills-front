@@ -47,11 +47,11 @@ onMounted(() => {
 // }
 
 function showslow1() {
-  gsap.from('.sace', {
+  gsap.to('.sace', {
     duration: 0.2,
-    opacity: 0,
-    scale: 0.5,
-    y: 100,
+    opacity: 1,
+    scale: 1,
+    y: 0,
     ease: 'power1',
     stagger: 0.1,
   })
@@ -113,7 +113,7 @@ const lineBreak = computed(() => {
       </p>
     </div>
     <div class="flex flex-wrap mt-20">
-      <div v-for="(item, index) in sectors" id="sace" :key="index" :class="[hover === index ? 'activecell bounce' : 'bounce-reverse', index % lineBreak ? '' : 'ml-[6.8rem]']" class="-mr-[3.2rem] w-[270px] h-[240px] relative -mb-[3.2rem] cursor-pointer transition sace" @click="router.push(`/sector/${item.id}`)" @mouseover="hover = index" @mouseleave="hover = null">
+      <div v-for="(item, index) in sectors" id="sace" :key="index" :class="[hover === index ? 'activecell bounce' : 'bounce-reverse', index % lineBreak ? '' : 'ml-[6.8rem]']" class="-mr-[3.2rem] w-[270px] h-[240px] relative -mb-[3.2rem] opacity-0 scale-50 translate-y-[100px] cursor-pointer transition sace" @click="router.push(`/sector/${item.id}`)" @mouseover="hover = index" @mouseleave="hover = null">
         <h3 class="z-10 w-3/5 absolute text-center hex-text-center font-roboto font-medium text-lg text-gray-800 leading-6 -mt-3 transition">
           {{ item.name }}
         </h3>
