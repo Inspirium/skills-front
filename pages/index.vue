@@ -1,6 +1,4 @@
 <script setup lang="ts">
-
-import { ref } from 'vue'
 import gsap from 'gsap'
 
 const { $jsonSerializer } = useNuxtApp()
@@ -23,13 +21,23 @@ const hover = ref(null)
 const width = ref(320)
 const loaded = ref(false)
 
-onMounted(() => {
+function initAnimation() {
   window.addEventListener('resize', () => {
     width.value = window.innerWidth
   })
   width.value = window.innerWidth
   showslow1()
+}
+
+onUpdated(initAnimation)
+onMounted(initAnimation)
+
+onUnmounted(() => {
+  window.removeEventListener('resize', () => {
+    width.value = window.innerWidth
+  })
 })
+
 //
 // function beforeEnter(el) {
 //   el.style.opacity = 0
