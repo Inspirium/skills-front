@@ -20,7 +20,6 @@ const test = computed(() => {
 })
 
 const hover = ref(null)
-const show = ref(false)
 const width = ref(320)
 const loaded = ref(false)
 
@@ -29,7 +28,6 @@ onMounted(() => {
     width.value = window.innerWidth
   })
   width.value = window.innerWidth
-  show.value = true
   showslow1()
 })
 //
@@ -120,18 +118,12 @@ const lineBreak = computed(() => {
           {{ item.name }}
         </h3>
         <font-awesome-icon class="absolute hex-icon w-10 h-10 " :color="hover !== index ? `#${item.color}` : '#ffffff'" :icon="item.icon" />
-        <svg
-          id="Layer_1" class="dropshadow z-20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-          width="270px" height="240px" viewBox="0 0 141.74 162.98" xml:space="preserve"
-        >
-          <polygon
-            fill-rule="evenodd" clip-rule="evenodd" :fill="hover === index ? `#${item.color}` : '#ffffff'" class="text-white transition duration-500" points="141.74,40.62 71.21,0 0,40.87 0,122.36 71.21,162.98
-          141.74,122.12 "
-          />
-          <path
-            fill-rule="evenodd" clip-rule="evenodd" :fill="`#${item.color}`" d="M141.74,40.62L71.21,0L0,40.87v81.49l71.21,40.62l70.53-40.86
-          V40.62z M71.21,4.44l67.06,38.64v77.46l-67.06,38.87L3.48,120.77V43.31L71.21,4.44z"
-          />
+        <svg class="dropshadow z-20" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             width="270px" height="240px" viewBox="0 0 141.74 162.98" xml:space="preserve">
+          <polygon fill-rule="evenodd" clip-rule="evenodd" :fill="hover === index ? `#${item.color}` : '#ffffff'" class="text-white transition duration-500" points="141.74,40.62 71.21,0 0,40.87 0,122.36 71.21,162.98
+          141.74,122.12 "/>
+          <path fill-rule="evenodd" clip-rule="evenodd" :fill="`#${item.color}`" d="M141.74,40.62L71.21,0L0,40.87v81.49l71.21,40.62l70.53-40.86
+          V40.62z M71.21,4.44l67.06,38.64v77.46l-67.06,38.87L3.48,120.77V43.31L71.21,4.44z"/>
         </svg>
       </div>
     </div>

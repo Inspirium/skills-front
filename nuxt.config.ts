@@ -16,6 +16,7 @@ export default defineNuxtConfig({
       '@headlessui/vue',
       '@fortawesome/fontawesome-svg-core',
       '@fortawesome/free-solid-svg-icons',
+      '@fortawesome/vue-fontawesome',
     ],
   },
   vueuse: {
