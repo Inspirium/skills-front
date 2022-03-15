@@ -112,9 +112,9 @@ const lineBreak = computed(() => {
         <h1 class="font-semibold sm:text-[5rem] font-dosis">
           Istraži vještine
         </h1>
-        <h2 class="font-light sm:text-4xl font-dosis -mt-2">
-          Neki zgodan podnaslov
-        </h2>
+<!--        <h2 class="font-light sm:text-4xl font-dosis -mt-2">-->
+<!--          TBD podnaslov-->
+<!--        </h2>-->
       </div>
       <p class="max-w-xl text-right">
         <span class="text-cyan-400 font-bold text-2xl font-dosis">Grupe vještina</span> prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale. Klasteri vještina ilustriraju novi način gledanja na tržište rada na ‘dubljoj’ razini od klasifikacije zanimanja ili kvalifikacija. Ovaj pogled pokazuje kako su vještine povezane i povezane jedna s drugom te ilustrira prenosivost vještina u različitim zanimanjima.

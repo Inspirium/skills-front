@@ -5,7 +5,7 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
 const navigation = [
   { name: 'Početna', href: '#', current: true },
   { name: 'Više o projektu', href: '#', current: false },
-  { name: 'Ministarstvo gospodarstva', href: '#', current: false },
+  { name: 'MROSP', href: 'https://mrosp.gov.hr/', current: false },
   { name: 'Kontakt', href: '#', current: false },
 ]
 
