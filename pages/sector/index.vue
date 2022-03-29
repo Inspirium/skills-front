@@ -28,7 +28,7 @@ const hover = ref(null)
 <template>
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
     <!--    <font-awesome-icon icon="tree"></font-awesome-icon>-->
-    <div class="flex justify-between text-white items-end mt-12">
+    <div class="flex justify-between text-grey-700 items-end mt-12">
       <div class="">
         <h1 class="font-semibold sm:text-[5rem] font-dosis">Podgrupe vještine</h1>
         <h2 class="font-light sm:text-4xl font-dosis -mt-2">Neki zgodan podnaslov</h2>
@@ -43,7 +43,7 @@ const hover = ref(null)
         <font-awesome-icon  class="absolute hex-icon w-10 h-10 " :color="hover !== index ? `#${item.color}` : '#ffffff'" :icon="item.icon"></font-awesome-icon>
         <svg class="dropshadow z-20" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              width="270px" height="240px" viewBox="0 0 141.74 162.98" xml:space="preserve">
-          <polygon fill-rule="evenodd" clip-rule="evenodd" :fill="hover === index ? `#${item.color}` : '#ffffff'" class="text-white transition duration-500" points="141.74,40.62 71.21,0 0,40.87 0,122.36 71.21,162.98
+          <polygon fill-rule="evenodd" clip-rule="evenodd" :fill="hover === index ? `#${item.color}` : '#ffffff'" class="text-grey-700 transition duration-500" points="141.74,40.62 71.21,0 0,40.87 0,122.36 71.21,162.98
           141.74,122.12 "/>
           <path fill-rule="evenodd" clip-rule="evenodd" :fill="`#${item.color}`" d="M141.74,40.62L71.21,0L0,40.87v81.49l71.21,40.62l70.53-40.86
           V40.62z M71.21,4.44l67.06,38.64v77.46l-67.06,38.87L3.48,120.77V43.31L71.21,4.44z"/>
