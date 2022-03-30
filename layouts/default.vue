@@ -3,7 +3,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
 
 const navigation = [
-  { name: 'Početna', href: '#', current: true },
+  { name: 'Početna', href: '/', current: true },
   { name: 'Više o projektu', href: '#', current: false },
   { name: 'MROSP', href: 'https://mrosp.gov.hr/', current: false },
   { name: 'Kontakt', href: '#', current: false },
@@ -29,7 +29,7 @@ const navigation = [
           </div>
           <div class="flex-1 flex items-center justify-center sm:items-end sm:justify-start">
             <NuxtLink to="/" class="flex-shrink-0 flex items-center">
-              <img class="block lg:hidden h-8 w-auto" src="/logo.svg" alt="Workflow" />
+              <img class="block lg:hidden h-16 w-auto" src="/logo.svg" alt="Workflow" />
               <img class="hidden lg:block h-20 w-auto" src="/logo.svg" alt="Workflow" />
             </NuxtLink>
             <div class="hidden sm:ml-auto sm:flex items-center justify-end ">
@@ -75,16 +75,14 @@ const navigation = [
 
       <DisclosurePanel class="sm:hidden">
         <div class="px-2 pt-2 pb-3 space-y-1">
-          <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium font-dosis']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
+          <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href" :class="[item.current ? 'bg-cyan-500 text-white' : 'text-gray-800 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-bold font-dosis']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
         </div>
       </DisclosurePanel>
     </Disclosure>
     <div class="h-full">
       <NuxtPage></NuxtPage>
     </div>
-    <!--  <div class="footer text-gray-500 text-center w-full mt-28 pb-20 uppercase leading-6 tracking-[.5rem] text-sm">-->
-    <!--    <div class="p">Vještine — sva prava zadržana @2022. nešto</div>-->
-    <!--  </div>-->
+    <Footer></Footer>
   </div>
 
 </template>

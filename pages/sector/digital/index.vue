@@ -38,17 +38,16 @@ async function getDataSearch(term) {
 </script>
 
 <template>
-  <div v-if="skills.length" class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+  <div v-if="skills.length" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!--    <font-awesome-icon icon="tree"></font-awesome-icon>-->
-    <div class="flex justify-between text-grey-700 items-end mt-12">
-      <div class="">
-        <h1 class="font-semibold sm:text-[4rem] font-dosis fly-in">Digitalne vještine</h1>
-      </div>
-      <p class="max-w-xl text-right"><span class="font-bold text-2xl font-dosis text-cyan-500">Digitalne vještine... </span> [dolazi tekst]prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale.
+    <div class="sm:flex justify-between items-center text-center mb-8 mt-6 sm:mt-0 sm:space-x-8 w-full">
+      <h1 class="font-semibold sm:text-[5rem] text-[2.5rem] font-dosis fly-in mb-4">Digitalne vještine</h1>
+      <p class="max-w-xl sm:text-right "><span class="font-bold text-2xl font-dosis text-cyan-500">Digitalne vještine...</span> [dolazi tekst]prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale.
       </p>
     </div>
+
     <div class="flex mt-12">
-      <div @click="router.back()" class="relative flex cursor-pointer self-start">
+      <div @click="router.back()" class="relative sm:flex cursor-pointer self-start hidden">
         <h3 class="z-10 w-3/5 absolute text-center hex-text-center font-roboto font-medium text-2xl leading-8 transition text-white flex flex-col items-center justify-center">Povratak
           <font-awesome-icon class="w-14 h-14 mt-5" color="#ffffff" icon="arrow-left-long" />
         </h3>
@@ -60,24 +59,21 @@ async function getDataSearch(term) {
           V40.62z M71.21,4.44l67.06,38.64v77.46l-67.06,38.87L3.48,120.77V43.31L71.21,4.44z"/>
         </svg>
       </div>
-      <div class="w-full">
-        <Search @update="getDataSearch($event)" @reset="results = []" :placeholder="'Pretraži digitalne vještine'"></Search>
-        <div v-for="(item, index) in results.length ? results : skills" @click="router.push(`/sector/skill/${item.id}`)" class="font-dosis ml-16 cursor-pointer group test">
+      <div class="w-full mb-10">
+        <Search @update="getDataSearch($event)" @reset="results = []" :placeholder="'Pretraži digitalne vještine'" class="mb-4" />
+        <div v-for="(item, index) in results.length ? results : skills" @click="router.push(`/sector/skill/${item.id}`)" class="font-dosis sm:ml-16 cursor-pointer group test">
           <div v-if="index !== 0" class="container mt-2">
             <div class="border-bottom-das"></div>
           </div>
-          <h2 class="text-4xl font-semibold pt-3 group-hover:scale-105 origin-left transition text-cyan-500">{{ item.name }}</h2>
-          <h3 class="text-2xl font-normal py-3 text-grey-700">{{ item.description }}</h3>
-<!--          <ul v-if="false" class="font-roboto flex space-x-4 text-lg">-->
-<!--            <li class="text-gray-500">Tip vještine: <span class="font-medium text-grey-700">{{ item.skill_level_id }}</span></li>-->
-<!--            <li class="text-gray-500">Razina vještine: <span class="font-medium text-grey-700">{{ item.skill_type_id }}</span></li>-->
-<!--            <li class="text-gray-500">Izvor: <span class="font-medium text-grey-700">{{ item.source_id }}</span></li>-->
-<!--          </ul>-->
+          <h2 class="text-3xl font-semibold pt-3 group-hover:scale-105 origin-left transition text-cyan-500">{{ item.name }}</h2>
+          <h3 v-if="item.description !== ''" class="sm:text-2xl text-xl font-normal py-1 sm:py-2 text-grey-700">{{ item.description }}</h3>
+          <!--          <ul v-if="false" class="font-roboto flex space-x-4 text-lg">-->
+          <!--            <li class="text-gray-500">Tip vještine: <span class="font-medium text-grey-700">{{ item.skill_level_id }}</span></li>-->
+          <!--            <li class="text-gray-500">Razina vještine: <span class="font-medium text-grey-700">{{ item.skill_type_id }}</span></li>-->
+          <!--            <li class="text-gray-500">Izvor: <span class="font-medium text-grey-700">{{ item.source_id }}</span></li>-->
+          <!--          </ul>-->
         </div>
       </div>
-
     </div>
-
   </div>
-
 </template>
