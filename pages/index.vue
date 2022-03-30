@@ -107,13 +107,13 @@ const lineBreak = computed(() => {
     <!--        <div class="card"></div>-->
     <!--      </transition>-->
     <!--    </client-only>-->
-    <div class="md:flex justify-between md:mt-12">
+    <div class="md:flex justify-between sm:space-x-20 md:mt-12 md:items-center">
       <div class="bounce-reverse">
-        <h1 class="font-bold text-[3rem] md:text-[5rem] font-dosis text-grey-700">
-          Istraži vještine
+        <h1 class="font-bold text-[3rem] leading-[3.5rem] md:my-0 my-6 md:text-[4.5rem] md:leading-[5rem] font-dosis text-grey-700">
+          Katalog digitalnih i zelenih vještina
         </h1>
         <div class="md:flex md:space-x-2 space-y-2 items-baseline">
-          <h2 class="font-semibold text-2xl md:text-2xl font-dosis md:-mt-2">
+          <h2 class="font-semibold text-2xl md:text-2xl font-dosis md:mt-6">
             Prikaži izdvojeno:
           </h2>
           <div @click="router.push('/sector/digital')" class="text-white mr-3 md:mr-0 inline-block rounded-lg bg-cyan-500 sm:px-2 px-4 sm:py-1 py-2 font-semibold cursor-pointer hover:scale-110 hover:shadow-xl	transition">Digitalne vještine</div>

@@ -41,8 +41,8 @@ const hover = ref(null)
       </div>
 
     </div>
-    <div v-if="true" class="flex sm:flex-row flex-col relative mt-2 sm:mt-12">
-      <div @click="router.back()" class="relative sm:flex cursor-pointer self-start hidden">
+    <div v-if="true" class="flex sm:flex-row flex-col relative mt-2 sm:mt-12 mb-20">
+      <div @click="router.back()" class="grow-0 shrink-0 relative sm:flex cursor-pointer self-start hidden">
         <h3 class="z-10 w-3/5 absolute text-center hex-text-center font-roboto font-medium text-2xl leading-8 transition text-white flex flex-col items-center justify-center">Povratak
           <font-awesome-icon class="w-14 h-14 mt-5" color="#ffffff" icon="arrow-left-long" />
         </h3>
@@ -54,23 +54,23 @@ const hover = ref(null)
           V40.62z M71.21,4.44l67.06,38.64v77.46l-67.06,38.87L3.48,120.77V43.31L71.21,4.44z"/>
         </svg>
       </div>
-      <div class="sm:w-2/5">
-        <div class="text-grey-700 font-dosis sm:ml-16 text-center sm:text-left">
-          <h2 class="text-5xl font-semibold pt-3">{{ skill.name }}</h2>
-          <h3 v-if="skill.description !== ''" class="text-2xl font-normal py-3">{{ skill.description }}</h3>
-          <div class="container mb-4 mt-6 sm:w-3/4">
+      <div class="w-[646px]">
+        <div class="text-grey-700 font-dosis sm:ml-10 text-center sm:text-left">
+          <h2 class="text-4xl font-semibold">{{ skill.name }}</h2>
+<!--          <h3 v-if="skill.description !== ''" class="text-2xl font-normal py-3">{{ skill.description }}</h3>-->
+          <div class="container mb-4 mt-6">
             <div class="border-bottom-das"></div>
           </div>
-          <ul class="font-roboto flex flex-col space-y-4 text-lg mt-4">
+          <ul class="font-roboto flex flex-col space-y-3 text-lg mt-4">
             <li class="text-gray-500">Tip vještine: <span class="font-medium text-grey-700">{{ skill.skillType.name }}</span></li>
-            <li class="text-gray-500">Razina vještine: <span class="font-medium text-grey-700">{{ skill.skillLevel.name }}</span></li>
+<!--            <li class="text-gray-500">Razina vještine: <span class="font-medium text-grey-700">{{ skill.skillLevel.name }}</span></li>-->
             <li class="text-gray-500">Izvor: <span class="font-medium text-grey-700">{{ skill.source.name }}</span></li>
           </ul>
         </div>
       </div>
-      <div class="sm:ml-16 mt-10 sm:mt-0 mb-10 text-center sm:text-left">
-        <h3 class="font-dosis font-medium sm:text-4xl text-3xl leading-8 transition text-cyan-500">Povezana zanimanja</h3>
-        <div class="container mb-4 mt-6">
+      <div class="shrink-1 grow-0 sm:w-[280px] sm:ml-16 mt-10 sm:mt-0 mb-10 text-center sm:text-left">
+        <h3 class="font-dosis font-semibold sm:text-3xl text-3xl leading-8 transition text-cyan-500">Povezana zanimanja</h3>
+        <div class="container mb-4 mt-4">
           <div class="border-bottom-das"></div>
         </div>
         <ul class="font-roboto flex flex-col sm:items-start items-center space-y-4 text-lg list-disc">

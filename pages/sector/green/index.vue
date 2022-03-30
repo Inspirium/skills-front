@@ -13,7 +13,8 @@ const skills = ref([])
 function loadIt() {
   useApiFetch(`/api/v1/skills/`, {
     params: {
-      'filter[skillType]': 'Zelena'
+      'filter[skillType]': 'Zelena',
+      'include': 'skillType,source'
     },
   }).then((data) => {
     skills.value = $jsonSerializer.deserialize('skills', data.data.value)
@@ -42,7 +43,7 @@ async function getDataSearch(term) {
 <template>
   <div v-if="skills.length" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!--    <font-awesome-icon icon="tree"></font-awesome-icon>-->
-    <div class="sm:flex justify-between items-center text-center mb-8 mt-6 sm:mt-0 sm:space-x-8 w-full">
+    <div class="sm:flex justify-between items-center text-center mb-8 mt-6 sm:mt-6 sm:space-x-8 w-full">
       <h1 class="font-semibold sm:text-[5rem] text-[2.5rem] font-dosis fly-in mb-4">Zelene vještine</h1>
       <p class="max-w-xl sm:text-right "><span class="font-bold text-2xl font-dosis text-lime-600">Zelene vještine...</span> [dolazi tekst]prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale.
       </p>
@@ -68,12 +69,10 @@ async function getDataSearch(term) {
             <div class="border-bottom-das"></div>
           </div>
           <h2 class="text-3xl font-semibold pt-3 group-hover:scale-105 origin-left transition text-lime-600">{{ item.name }}</h2>
-          <h3 v-if="item.description !== ''" class="sm:text-2xl text-xl font-normal py-1 sm:py-2 text-grey-700">{{ item.description }}</h3>
-<!--          <ul v-if="false" class="font-roboto flex space-x-4 text-lg">-->
-<!--            <li class="text-gray-500">Tip vještine: <span class="font-medium text-grey-700">{{ item.skill_level_id }}</span></li>-->
-<!--            <li class="text-gray-500">Razina vještine: <span class="font-medium text-grey-700">{{ item.skill_type_id }}</span></li>-->
-<!--            <li class="text-gray-500">Izvor: <span class="font-medium text-grey-700">{{ item.source_id }}</span></li>-->
-<!--          </ul>-->
+          <div class="flex space-x-4 items-baseline">
+            <h3 class="sm:text-lg text-lg font-normal py-1 sm:py-2 text-grey-700"><span class="font-semibold uppercase text-base">Izvor: </span>{{ item.source.name }}</h3>
+            <h3 class="sm:text-lg text-lg font-normal py-1 sm:py-2 text-grey-700"><span class="font-semibold uppercase text-base">Tip: </span>{{ item.skillType.name }} vještina</h3>
+          </div>
         </div>
       </div>
     </div>

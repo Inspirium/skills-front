@@ -3,7 +3,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
 
 const navigation = [
-  { name: 'Početna', href: '/', current: true },
+  { name: 'Početna', href: '/', current: false },
   { name: 'Više o projektu', href: '#', current: false },
   { name: 'MROSP', href: 'https://mrosp.gov.hr/', current: false },
   { name: 'Kontakt', href: '#', current: false },
@@ -34,7 +34,7 @@ const navigation = [
             </NuxtLink>
             <div class="hidden sm:ml-auto sm:flex items-center justify-end ">
               <div class="flex space-x-4 ">
-                <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'text-cyan-500' : 'text-gray-700 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-lg uppercase font-medium font-dosis font-semibold']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
+                <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'text-gray-700' : 'text-gray-700 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-lg uppercase font-medium font-dosis font-semibold']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
               </div>
             </div>
           </div>
@@ -68,7 +68,7 @@ const navigation = [
           <!--          </Menu>-->
           <!--        </div>-->
         </div>
-        <div class="container">
+        <div class="h-[1px] relative">
           <div class="border-bottom-das"></div>
         </div>
       </div>
@@ -79,7 +79,7 @@ const navigation = [
         </div>
       </DisclosurePanel>
     </Disclosure>
-    <div class="h-full">
+    <div class="h-full min-h-[calc(100vh-16.3rem)]">
       <NuxtPage></NuxtPage>
     </div>
     <Footer></Footer>

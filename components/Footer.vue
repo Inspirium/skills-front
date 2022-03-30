@@ -1,7 +1,7 @@
 
 <template>
-  <div class="footer max-w-7xl sm:mx-auto pb-20 mx-4">
-    <div class="flex sm:flex-row flex-col sm:space-x-10 space-y-10 sm:space-y-0 sm:justify-evenly items-center bg-white rounded-xl py-4 shadow-xl">
+  <div class="footer max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sm:pt-1 pb-10">
+    <div class="flex sm:flex-row w-full flex-col sm:space-x-10 space-y-10 sm:space-y-0 sm:justify-evenly items-center bg-white rounded-xl py-4 shadow-xl px-4">
       <a href="https://hzz.hr/" target="_blank">
         <img class="block h-14 w-auto" src="/hzz.png" alt="Workflow" />
       </a>

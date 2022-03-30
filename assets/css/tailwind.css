@@ -109,7 +109,7 @@ label {
 .hexoccupation {
     position: absolute;
     top: -300px;
-    left: 820px;
+    right: -670px;
     z-index: -1;
 }
 

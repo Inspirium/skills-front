@@ -39,6 +39,17 @@ function showslow1() {
 }
 showslow1()
 
+function source(item) {
+  switch (item) {
+    case 1:
+      return 'Registar HKO'
+      break
+    case 2:
+      return 'Registar HKO'
+      break
+  }
+}
+
 </script>
 
 <template>
@@ -84,8 +95,11 @@ showslow1()
           <div v-if="index !== 0" class="container mt-2">
             <div class="border-bottom-das"></div>
           </div>
-          <h2 class="text-4xl font-semibold pt-3 group-hover:scale-105 origin-left transition" :style="`color:#${sectors.parent.color}`">{{ item.name }}</h2>
-          <h3 v-if="item.description !== ''" class="sm:text-2xl text-xl font-normal py-1 sm:py-2 text-grey-700">{{ item.description }}</h3>
+          <h2 class="text-3xl font-semibold pt-3 group-hover:scale-105 origin-left transition text-gray-800">{{ item.name }}</h2>
+          <div class="flex space-x-4 items-baseline">
+            <h3 class="sm:text-lg text-lg font-normal py-1 sm:py-2 text-grey-700"><span class="font-semibold uppercase text-base">Izvor: </span>{{ source(item.source_id) }}</h3>
+            <h3 class="sm:text-lg text-lg font-normal py-1 sm:py-2 text-grey-700"><span class="font-semibold uppercase text-base">Tip: </span>{{ item.skill_type_id === 4 ? 'Zelena' : 'Digitalna' }} vještina</h3>
+          </div>
           <ul v-if="false" class="font-roboto flex space-x-4 text-lg">
             <li class="text-gray-500">Tip vještine: <span class="font-medium text-grey-700">{{ item.skill_level_id }}</span></li>
             <li class="text-gray-500">Razina vještine: <span class="font-medium text-grey-700">{{ item.skill_type_id }}</span></li>

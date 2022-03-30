@@ -205,7 +205,13 @@ watch(selectedSkomp, () => {
   addSkomp(selectedSkomp)
 })
 
-
+function deleteIt(id) {
+  useApiFetch(`/api/v1/skills/${id}`, {
+    method: 'delete',
+  }).then(() => {
+    loadSkills()
+  })
+}
 
 </script>
 
@@ -459,7 +465,7 @@ watch(selectedSkomp, () => {
   </div>
     <div class="p-8">
       <h2 class="text-2xl font-bold tracking-tight text-gray-700 sm:text-2xl">
-        Popis izvora
+        Popis vještina
       </h2>
     </div>
     <div class="flex flex-col px-8">
@@ -475,7 +481,7 @@ watch(selectedSkomp, () => {
               </thead>
               <tbody>
               <tr v-for="(item, personIdx) in skills" :key="personIdx" :class="personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td class="px-6 py-4  text-sm text-gray-500">
                   {{ item.name }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
