@@ -116,8 +116,8 @@ const lineBreak = computed(() => {
           <h2 class="font-semibold text-2xl md:text-2xl font-dosis md:-mt-2">
             Prikaži izdvojeno:
           </h2>
-          <div @click="router.push('/sector/digital')" class="text-white mr-3 md:mr-0 inline-block rounded-lg bg-cyan-500 sm:px-2 px-4 sm:py-1 py-2 font-semibold cursor-pointer">Digitalne vještine</div>
-          <div @click="router.push('/sector/green')" class="text-white inline-block rounded-lg bg-lime-500 sm:px-2 px-4 sm:py-1 py-2 font-semibold cursor-pointer">Zelene vještine</div>
+          <div @click="router.push('/sector/digital')" class="text-white mr-3 md:mr-0 inline-block rounded-lg bg-cyan-500 sm:px-2 px-4 sm:py-1 py-2 font-semibold cursor-pointer hover:scale-110 hover:shadow-xl	transition">Digitalne vještine</div>
+          <div @click="router.push('/sector/green')" class="text-white inline-block rounded-lg bg-lime-500 sm:px-2 px-4 sm:py-1 py-2 font-semibold cursor-pointer hover:scale-110 hover:shadow-xl	transition">Zelene vještine</div>
         </div>
       </div>
       <p class="max-w-xl text-left sm:text-right md:mt-0 mt-10">
