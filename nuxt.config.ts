@@ -2,7 +2,8 @@ import { defineNuxtConfig } from 'nuxt3'
 
 export default defineNuxtConfig({
   meta: {
-    title: 'Skills front',
+    title: 'Katalog digitalnih i zelenih vještina - HZZ.hr',
+    description: 'Katalog digitalnih i zelenih vještina',
   },
   buildModules: [
     '@vueuse/nuxt',
