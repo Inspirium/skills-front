@@ -14,7 +14,7 @@ function loadIt() {
   useApiFetch(`/api/v1/skills/`, {
     params: {
       'filter[skillType]': 'Zelena',
-      'include': 'skillType,source'
+      'include': 'source'
     },
   }).then((data) => {
     skills.value = $jsonSerializer.deserialize('skills', data.data.value)
@@ -45,8 +45,8 @@ async function getDataSearch(term) {
     <!--    <font-awesome-icon icon="tree"></font-awesome-icon>-->
     <div class="sm:flex justify-between items-center text-center mb-8 mt-6 sm:mt-6 sm:space-x-8 w-full">
       <h1 class="font-semibold sm:text-[5rem] text-[2.5rem] font-dosis fly-in mb-4">Zelene vještine</h1>
-      <p class="max-w-xl sm:text-right "><span class="font-bold text-2xl font-dosis text-lime-600">Zelene vještine...</span> [dolazi tekst]prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale.
-      </p>
+<!--      <p class="max-w-xl sm:text-right "><span class="font-bold text-2xl font-dosis text-lime-600">Zelene vještine...</span> [dolazi tekst]prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale.-->
+<!--      </p>-->
     </div>
 
     <div class="flex mt-12">
@@ -69,9 +69,9 @@ async function getDataSearch(term) {
             <div class="border-bottom-das"></div>
           </div>
           <h2 class="text-3xl font-semibold pt-3 group-hover:scale-105 origin-left transition text-lime-600">{{ item.name }}</h2>
-          <div class="flex space-x-4 items-baseline">
+          <div class="flex space-x-4 items-center">
             <h3 class="sm:text-lg text-lg font-normal py-1 sm:py-2 text-grey-700"><span class="font-semibold uppercase text-base">Izvor: </span>{{ item.source.name }}</h3>
-            <h3 class="sm:text-lg text-lg font-normal py-1 sm:py-2 text-grey-700"><span class="font-semibold uppercase text-base">Tip: </span>{{ item.skillType.name }} vještina</h3>
+<!--            <h3 class="text-sm font-normal px-2 py-[1px] whitespace-nowrap rounded-md text-white uppercase" :class="item.skill_type_id === 1 ? 'bg-lime-600' : 'bg-cyan-500'">{{ item.skill_type_id === 1 ? 'Zelena' : 'Digitalna' }} vještina</h3>-->
           </div>
         </div>
       </div>

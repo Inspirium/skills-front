@@ -54,9 +54,9 @@ const hover = ref(null)
           V40.62z M71.21,4.44l67.06,38.64v77.46l-67.06,38.87L3.48,120.77V43.31L71.21,4.44z"/>
         </svg>
       </div>
-      <div class="w-[646px]">
+      <div class="sm:w-[646px]">
         <div class="text-grey-700 font-dosis sm:ml-10 text-center sm:text-left">
-          <h2 class="text-4xl font-semibold">{{ skill.name }}</h2>
+          <h2 class="text-2xl sm:text-4xl font-semibold">{{ skill.name }}</h2>
 <!--          <h3 v-if="skill.description !== ''" class="text-2xl font-normal py-3">{{ skill.description }}</h3>-->
           <div class="container mb-4 mt-6">
             <div class="border-bottom-das"></div>
@@ -73,7 +73,7 @@ const hover = ref(null)
         <div class="container mb-4 mt-4">
           <div class="border-bottom-das"></div>
         </div>
-        <ul class="font-roboto flex flex-col sm:items-start items-center space-y-4 text-lg list-disc">
+        <ul class="font-roboto flex flex-col sm:items-start items-center space-y-4 text-lg list-disc sm:list-outside list-inside">
           <li v-for="item in skill.occupations" class="text-gray-700"><span class="font-normal text-grey-700">{{ item.name }}</span></li>
         </ul>
         <svg class="hexoccupation bounce-reverse hidden sm:block" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

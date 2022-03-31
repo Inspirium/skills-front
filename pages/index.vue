@@ -1,4 +1,105 @@
 <script setup lang="ts">
+import gsap from 'gsap'
+
+const { $jsonSerializer } = useNuxtApp()
+
+const router = useRouter()
+const route = useRoute()
+
+const { data: sectors } = await useApiFetch('/api/v1/sectors', {
+  params: {
+    'filter[parent]': false,
+  },
+  parseResponse: txt => $jsonSerializer.deserialize('sectors', JSON.parse(txt)),
+})
+
+const test = computed(() => {
+  return sectors.value.map(item => item.icon)
+})
+
+const hover = ref(null)
+const width = ref(320)
+const loaded = ref(false)
+
+function initAnimation() {
+  console.log('daj nekaj')
+  loaded.value = true
+  window.addEventListener('resize', () => {
+    width.value = window.innerWidth
+  })
+  width.value = window.innerWidth
+  showslow1()
+}
+
+onUpdated(initAnimation)
+onMounted(initAnimation)
+
+onUnmounted(() => {
+  window.removeEventListener('resize', () => {
+    width.value = window.innerWidth
+  })
+})
+
+
+//
+// function beforeEnter(el) {
+//   el.style.opacity = 0
+//   el.style.transform = 'scale(2,2)'
+// }
+//
+// function enter(el, done) {
+//   gsap.to(el, {
+//     duration: 1,
+//     opacity: 1,
+//     scale: 1,
+//     ease: 'bounce.out',
+//     onComplete: done
+//   })
+// }
+
+function showslow1() {
+  gsap.to('.sace', {
+    duration: 0.2,
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    ease: 'power1',
+    stagger: 0.1,
+  })
+}
+
+const lineBreak = computed(() => {
+  let b
+  if (width.value < 450)
+    b = 2
+
+  if (width.value > 450)
+    b = 3
+
+  if (width.value > 580)
+    b = ((width.value - 580) / 234 >> 0) * 2 + 4
+
+  if (b > 10)
+    b = 10
+
+  return b
+})
+
+// const beforeEnter = (el) => {
+//   el.style.opacity = 0
+//   el.style.transform = 'scale(0,0)'
+// }
+//
+// const enter = (el) => {
+//   gsap.to(el, {
+//     duration: 10,
+//     opacity: 1,
+//     scale: 1,
+//     ease: 'bounce.out',
+//     onComplete: done
+//   })
+// }
+
 </script>
 
 <template>
@@ -21,7 +122,8 @@
         </div>
       </div>
       <p class="max-w-xl text-left sm:text-right md:mt-0 mt-10">
-        <span class="text-cyan-500 font-bold text-2xl font-dosis">Grupe vještina</span> prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale. Klasteri vještina ilustriraju novi način gledanja na tržište rada na ‘dubljoj’ razini od klasifikacije zanimanja ili kvalifikacija. Ovaj pogled pokazuje kako su vještine povezane i povezane jedna s drugom te ilustrira prenosivost vještina u različitim zanimanjima.
+        <span class="text-cyan-500 font-bold text-2xl font-dosis">Vještine</span>  predstavljaju primjenu znanja i upotrebu propisanih načina rada u izvršenju zadaća i rješavanju problema. U Hrvatskome kvalifikacijskom okviru vještine se dijele na kognitivne (logičko, intuitivno i kreativno razmišljanje) i psihomotoričke (fizička spretnost te upotreba metoda, instrumenata, alata i materijala).
+        Standardi zanimanja, skupovi kompetencija, standardi kvalifikacija, skupovi ishodi učenja i obrazovni programi svrstavaju se u sektore utvrđene za potrebe provedbe Hrvatskoga kvalifikacijskog okvira.
       </p>
     </div>
     <client-only>
