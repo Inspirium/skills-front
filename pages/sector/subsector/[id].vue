@@ -18,11 +18,11 @@ const { data: sectors } = await useApiFetch(`/api/v1/sectors/${route.params.id}`
 let t
 onMounted(() => {
   setTimeout(() => {
-    t = gsap.from('.test', {
+    t = gsap.to('.test', {
       duration: 0.5,
-      opacity: 0,
-      scale: 0,
-      y: 200,
+      opacity: 1,
+      scale: 1,
+      y: 0,
       ease: 'power1',
       stagger: {
         from: 'edges',
@@ -97,7 +97,7 @@ onUnmounted(() => {
         </svg>
       </div>
       <div class="w-full">
-        <div v-for="(item, index) in sectors.skills" :key="index" class="font-dosis sm:ml-16 cursor-pointer group test" @click="router.push(`/sector/skill/${item.id}`)">
+        <div v-for="(item, index) in sectors.skills" :key="index" class="font-dosis sm:ml-16 cursor-pointer group test opacity-0 scale-0 translate-y-[200px]" @click="router.push(`/sector/skill/${item.id}`)">
           <div v-if="index !== 0" class="container mt-2">
             <div class="border-bottom-das" />
           </div>
