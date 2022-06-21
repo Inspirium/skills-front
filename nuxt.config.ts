@@ -1,6 +1,7 @@
-import { defineNuxtConfig } from 'nuxt3'
+import { defineNuxtConfig } from 'nuxt'
 
 export default defineNuxtConfig({
+  ssr: false,
   meta: {
     title: 'Katalog digitalnih i zelenih vještina - HZZ.hr',
     description: 'Katalog digitalnih i zelenih vještina',
