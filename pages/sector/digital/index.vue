@@ -5,18 +5,14 @@ const route = useRoute()
 
 const { $jsonSerializer } = useNuxtApp()
 
-const skills = ref([])
-function loadIt() {
+const skills = await
   useApiFetch('/api/v1/skills/', {
     params: {
       'filter[skillType]': 'Digitalna',
       'include': 'source',
     },
-  }).then((data) => {
-    skills.value = $jsonSerializer.deserialize('skills', data.data.value)
+    parseResponse: txt => $jsonSerializer.deserialize('skills', JSON.parse(txt))
   })
-}
-loadIt()
 
 const results = ref([])
 
@@ -28,14 +24,14 @@ async function getDataSearch(term) {
       'include': 'source',
     },
   }).then((data) => {
-    results.value = $jsonSerializer.deserialize('skills', data.data.value)
+    results.value = $jsonSerializer.deserialize('skills', data)
   })
 }
 
 </script>
 
 <template>
-  <div v-if="skills.length" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!--    <font-awesome-icon icon="tree"></font-awesome-icon>-->
     <div class="sm:flex justify-between items-center text-center mb-8 mt-6 sm:mt-0 sm:space-x-8 w-full">
       <h1 class="font-semibold sm:text-[5rem] text-[2.5rem] font-dosis fly-in mb-4">

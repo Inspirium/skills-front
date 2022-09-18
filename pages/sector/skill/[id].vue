@@ -7,25 +7,20 @@ const route = useRoute()
 
 const { $jsonSerializer } = useNuxtApp()
 
-const skill = ref({})
-function loadIt() {
-  useApiFetch(`/api/v1/skills/${route.params.id}`, {
+const skill = await useApiFetch(`/api/v1/skills/${route.params.id}`, {
     params: {
       include: 'occupations,skillType,skillLevel,source,programs',
     },
-  }).then((data) => {
-    skill.value = $jsonSerializer.deserialize('skills', data.data.value)
+  parseResponse: txt => $jsonSerializer.deserialize('skills', JSON.parse(txt))
   })
-}
-loadIt()
+
 
 const hover = ref(null)
 
 </script>
 
 <template>
-  <div v-if="Object.keys(skill).length" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!--    <font-awesome-icon icon="tree"></font-awesome-icon>-->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between sm:flex-row flex-col text-grey-700 sm:items-end items-start mt-6">
       <div class="relative flex sm:hidden cursor-pointer self-center group" @click="router.back()">
         <h3 class="z-10 w-3/5 absolute text-center hex-text-center font-roboto font-medium text-xl leading-6 transition text-white flex flex-col items-center justify-center">
@@ -44,7 +39,7 @@ const hover = ref(null)
         </svg>
       </div>
     </div>
-    <div v-if="true" class="flex sm:flex-row flex-col relative mt-2 sm:mt-12 mb-20">
+    <div class="flex sm:flex-row flex-col relative mt-2 sm:mt-12 mb-20">
       <div class="grow-0 shrink-0 relative sm:flex cursor-pointer self-start hidden" @click="router.back()">
         <h3 class="z-10 w-3/5 absolute text-center hex-text-center font-roboto font-medium text-2xl leading-8 transition text-white flex flex-col items-center justify-center">
           Povratak

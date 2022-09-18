@@ -7,17 +7,13 @@ const route = useRoute()
 
 const { $jsonSerializer } = useNuxtApp()
 
-const sectors = ref([])
-function loadIt() {
+const sectors = await
   useApiFetch(`/api/v1/sectors/${route.params.id}`, {
     params: {
       include: 'subsectors',
     },
-  }).then((data) => {
-    sectors.value = $jsonSerializer.deserialize('sectors', data.data.value)
+    parseResponse: txt => $jsonSerializer.deserialize('sectors', JSON.parse(txt))
   })
-}
-loadIt()
 
 const hover = ref(null)
 

@@ -8,18 +8,14 @@ const route = useRoute()
 
 const { $jsonSerializer } = useNuxtApp()
 
-const skills = ref([])
-function loadIt() {
+const skills = await
   useApiFetch('/api/v1/skills/', {
     params: {
       'filter[skillType]': 'Zelena',
       'include': 'source',
     },
-  }).then((data) => {
-    skills.value = $jsonSerializer.deserialize('skills', data.data.value)
+    parseResponse: txt => $jsonSerializer.deserialize('skills', JSON.parse(txt))
   })
-}
-loadIt()
 
 const results = ref([])
 
@@ -31,7 +27,7 @@ async function getDataSearch(term) {
       'include': 'source',
     },
   }).then((data) => {
-    results.value = $jsonSerializer.deserialize('skills', data.data.value)
+    results.value = $jsonSerializer.deserialize('skills', data)
   })
 }
 

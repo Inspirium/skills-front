@@ -8,16 +8,16 @@ const useApiFetch = async(url: string, options) => {
     router.push('/login')
     return
   } */
-  return useFetch(url, {
-    baseURL: config.URL,
-    headers: {
-      // 'Authorization': `Bearer ${userStore.token}`,
-      'Content-Type': 'application/vnd.api+json',
-      'Accept': 'application/vnd.api+json',
-    },
-    parseResponse: txt => JSON.parse(txt),
-    ...options,
-  })
+      return await $fetch(url, {
+        baseURL: config.URL,
+        headers: {
+          // 'Authorization': `Bearer ${userStore.token}`,
+          'Content-Type': 'application/vnd.api+json',
+          'Accept': 'application/vnd.api+json',
+        },
+        parseResponse: txt => JSON.parse(txt),
+        ...options,
+      })
 }
 
 export default useApiFetch

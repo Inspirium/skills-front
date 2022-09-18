@@ -1,25 +1,21 @@
 <script setup lang="ts">
 
 import { ref } from 'vue'
+import useApiFetch
+  from '~/composables/useApiFetch'
 
 const router = useRouter()
 const route = useRoute()
 
 const { $jsonSerializer } = useNuxtApp()
 
-const sectors = ref([])
-function loadIt() {
-  useApiFetch(`/api/v1/sectors/${route.params.id}`, {
+const sectors = await useApiFetch(`/api/v1/sectors/${route.params.id}`, {
     params: {
       include: 'subsectors',
       with: 'skills',
     },
-  }).then((data) => {
-    sectors.value = $jsonSerializer.deserialize('sectors', data.data.value)
+    parseResponse: txt => $jsonSerializer.deserialize('sectors', JSON.parse(txt)),
   })
-}
-loadIt()
-
 const hover = ref(null)
 
 function source(item) {
@@ -38,7 +34,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="Object.keys(sectors).length" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!--    <font-awesome-icon icon="tree"></font-awesome-icon>-->
     <div class="flex justify-between sm:flex-row flex-col text-grey-700 sm:items-end items-start mt-6">
       <div class="block sm:hidden mx-auto">

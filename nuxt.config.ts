@@ -1,11 +1,5 @@
-import { defineNuxtConfig } from 'nuxt'
-
 export default defineNuxtConfig({
   ssr: false,
-  components: {
-    global: true,
-    dirs: ['~/components'],
-  },
   meta: {
     title: 'Katalog digitalnih i zelenih vještina - HZZ.hr',
     description: 'Katalog digitalnih i zelenih vještina',

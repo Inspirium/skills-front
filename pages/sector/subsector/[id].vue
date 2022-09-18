@@ -7,7 +7,7 @@ const route = useRoute()
 
 const { $jsonSerializer } = useNuxtApp()
 
-const { data: sectors } = await useApiFetch(`/api/v1/sectors/${route.params.id}`, {
+const sectors  = await useApiFetch(`/api/v1/sectors/${route.params.id}`, {
   params: {
     include: 'subsectors,parent',
     with: 'skills',
