@@ -28,7 +28,7 @@ function loadIt() {
       include: 'sector',
     },
   }).then((data) => {
-    dataFetched.value = $jsonSerializer.deserialize('occupations', data.data.value)
+    dataFetched.value = $jsonSerializer.deserialize('occupations', data)
   })
 }
 loadIt()
@@ -60,7 +60,7 @@ function loadSectors() {
       include: 'parent',
     },
   }).then((data) => {
-    sectors.value = $jsonSerializer.deserialize('sectors', data.data.value)
+    sectors.value = $jsonSerializer.deserialize('sectors', data)
   })
 }
 loadSectors()

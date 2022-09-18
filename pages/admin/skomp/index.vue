@@ -29,7 +29,7 @@ const { $jsonSerializer } = useNuxtApp()
 function loadIt() {
   useApiFetch('/api/v1/clusters', {
   }).then((data) => {
-    dataFetched.value = $jsonSerializer.deserialize('clusters', data.data.value)
+    dataFetched.value = $jsonSerializer.deserialize('clusters', data)
   })
 }
 loadIt()

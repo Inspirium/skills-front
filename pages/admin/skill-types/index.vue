@@ -32,7 +32,7 @@ const { $jsonSerializer } = useNuxtApp()
 function loadIt() {
   useApiFetch('/api/v1/skill-types', {
   }).then((data) => {
-    dataFetched.value = $jsonSerializer.deserialize('skill-types', data.data.value)
+    dataFetched.value = $jsonSerializer.deserialize('skill-types', data)
   })
 }
 loadIt()

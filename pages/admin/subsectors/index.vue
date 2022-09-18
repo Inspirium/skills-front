@@ -75,7 +75,7 @@ function loadIt() {
       'filter[parent]': false,
     },
   }).then((data) => {
-    dataFetchedSectors.value = $jsonSerializer.deserialize('sectors', data.data.value)
+    dataFetchedSectors.value = $jsonSerializer.deserialize('sectors', data)
   })
 }
 loadIt()
@@ -100,7 +100,7 @@ function loadItSubSectors() {
       include: 'subsectors',
     },
   }).then((data) => {
-    filteredSubSections.value = $jsonSerializer.deserialize('sectors', data.data.value)
+    filteredSubSections.value = $jsonSerializer.deserialize('sectors', data)
   })
 }
 
@@ -114,7 +114,7 @@ function loadItSectors() {
       include: 'subsectors',
     },
   }).then((data) => {
-    dataFetchedSubSectors.value = $jsonSerializer.deserialize('sectors', data.data.value)
+    dataFetchedSubSectors.value = $jsonSerializer.deserialize('sectors', data)
   })
 }
 loadItSectors()

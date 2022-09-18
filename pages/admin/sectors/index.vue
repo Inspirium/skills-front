@@ -38,7 +38,7 @@ function loadIt() {
       'filter[parent]': false,
     },
   }).then((data) => {
-    dataFetched.value = $jsonSerializer.deserialize('sectors', data.data.value)
+    dataFetched.value = $jsonSerializer.deserialize('sectors', data)
   })
 }
 loadIt()

@@ -53,7 +53,7 @@ function loadSubSectors() {
       include: 'subsectors',
     },
   }).then((data) => {
-    subSector.value = $jsonSerializer.deserialize('sectors', data.data.value)
+    subSector.value = $jsonSerializer.deserialize('sectors', data)
   })
 }
 watch(selectedSector, () => {
@@ -67,33 +67,33 @@ function loadSectors() {
       'filter[parent]': false,
     },
   }).then((data) => {
-    sector.value = $jsonSerializer.deserialize('sectors', data.data.value)
+    sector.value = $jsonSerializer.deserialize('sectors', data)
   })
 }
 
 function loadTypes() {
   useApiFetch('/api/v1/skill-types', {
   }).then((data) => {
-    type.value = $jsonSerializer.deserialize('skill-types', data.data.value)
+    type.value = $jsonSerializer.deserialize('skill-types', data)
   })
 }
 function loadLevels() {
   useApiFetch('/api/v1/skill-levels', {
   }).then((data) => {
-    level.value = $jsonSerializer.deserialize('skill-levels', data.data.value)
+    level.value = $jsonSerializer.deserialize('skill-levels', data)
   })
 }
 function loadSource() {
   useApiFetch('/api/v1/sources', {
   }).then((data) => {
-    source.value = $jsonSerializer.deserialize('sources', data.data.value)
+    source.value = $jsonSerializer.deserialize('sources', data)
   })
 }
 
 function loadSkills() {
   useApiFetch('/api/v1/skills', {
   }).then((data) => {
-    skills.value = $jsonSerializer.deserialize('skills', data.data.value)
+    skills.value = $jsonSerializer.deserialize('skills', data)
   })
 }
 
@@ -155,7 +155,7 @@ function createIt() {
 function loadOccupation() {
   useApiFetch('/api/v1/occupations', {
   }).then((data) => {
-    occupations.value = $jsonSerializer.deserialize('occupations', data.data.value)
+    occupations.value = $jsonSerializer.deserialize('occupations', data)
   })
 }
 loadOccupation()
@@ -180,7 +180,7 @@ function removeOccupation(index) {
 function loadSkomp() {
   useApiFetch('/api/v1/clusters', {
   }).then((data) => {
-    skomp.value = $jsonSerializer.deserialize('clusters', data.data.value)
+    skomp.value = $jsonSerializer.deserialize('clusters', data)
   })
 }
 loadSkomp()
