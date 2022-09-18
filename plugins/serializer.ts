@@ -19,6 +19,17 @@ export default defineNuxtPlugin(() => {
       clusters: {
         type: 'clusters',
       },
+      programs: {
+        type: 'programs',
+      },
+    },
+  })
+  Serializer.register('programs', {
+    id: 'id',
+    relationships: {
+      skills: {
+        type: 'skills',
+      },
     },
   })
   Serializer.register('skill-types', {
