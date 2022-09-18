@@ -1,7 +1,7 @@
 // import { useUserStore } from "~/stores/user";
 
 const useApiFetch = async(url: string, options) => {
-  const config = useRuntimeConfig()
+  // const config = useRuntimeConfig()
   /* const userStore = useUserStore()
   const router = useRouter()
   if (!userStore.token) {
@@ -9,7 +9,7 @@ const useApiFetch = async(url: string, options) => {
     return
   } */
   return useFetch(url, {
-    baseURL: config.URL,
+    baseURL: 'https://vjestine.hzz.hr',
     headers: {
       // 'Authorization': `Bearer ${userStore.token}`,
       'Content-Type': 'application/vnd.api+json',
