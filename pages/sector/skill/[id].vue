@@ -69,10 +69,12 @@ const hover = ref(null)
           <div class="container mb-4 mt-6">
             <div class="border-bottom-das"></div>
           </div>
-          <h3 class="font-dosis font-semibold sm:text-3xl text-3xl leading-8 transition text-cyan-500 mb-2">Obrazovni program</h3>
-          <ul class="font-roboto flex flex-col sm:items-start items-center space-y-4 text-lg list-disc sm:list-outside list-inside">
-            <li v-for="item in skill.programs" class="text-gray-500"><span class="font-normal text-grey-700">{{ item.name }}</span></li>
-          </ul>
+          <template v-if="skill.programs.length">
+            <h3 class="font-dosis font-semibold sm:text-3xl text-3xl leading-8 transition text-cyan-500 mb-2">Obrazovni program</h3>
+            <ul class="font-roboto flex flex-col sm:items-start items-center space-y-4 text-lg list-disc sm:list-outside list-inside">
+              <li v-for="item in skill.programs" class="text-gray-500"><span class="font-normal text-grey-700">{{ item.name }}</span></li>
+            </ul>
+          </template>
         </div>
       </div>
       <div class="shrink-1 grow-0 sm:w-[280px] sm:ml-16 mt-10 sm:mt-0 mb-10 text-center sm:text-left">
