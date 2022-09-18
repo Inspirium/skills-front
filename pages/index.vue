@@ -1,4 +1,22 @@
 <script setup lang="ts">
+import {ref} from 'vue'
+
+const { $jsonSerializer } = useNuxtApp()
+
+const skillTotal = ref(null)
+const occupationTotal = ref(null)
+function loadIt() {
+  useApiFetch(`/api/v1/skills/count`, {
+  }).then((data) => {
+    skillTotal.value = data.data.value
+  })
+  useApiFetch(`/api/v1/occupations/count`, {
+  }).then((data) => {
+    occupationTotal.value = data.data.value
+  })
+}
+loadIt()
+
 </script>
 
 <template>
@@ -13,10 +31,10 @@
             Prikaži izdvojeno:
           </h2>
           <NuxtLink class="text-white mr-3 md:mr-0 inline-block rounded-lg bg-cyan-500 sm:px-2 px-4 sm:py-1 py-2 font-semibold cursor-pointer hover:scale-110 hover:shadow-xl transition" to="/sector/digital">
-            Digitalne vještine
+            Digitalne vještine ({{ skillTotal }})
           </NuxtLink>
           <NuxtLink class="text-white inline-block rounded-lg bg-lime-500 sm:px-2 px-4 sm:py-1 py-2 font-semibold cursor-pointer hover:scale-110 hover:shadow-xl transition" to="/sector/green">
-            Zelene vještine
+            Zelene vještine ({{ occupationTotal }})
           </NuxtLink>
         </div>
       </div>

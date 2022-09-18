@@ -11,7 +11,7 @@ const skill = ref({})
 function loadIt() {
   useApiFetch(`/api/v1/skills/${route.params.id}`, {
     params: {
-      'include': 'occupations,skillType,skillLevel,source',
+      'include': 'occupations,skillType,skillLevel,source,programs',
     },
   }).then((data) => {
     skill.value = $jsonSerializer.deserialize('skills', data.data.value)
@@ -65,6 +65,13 @@ const hover = ref(null)
             <li class="text-gray-500">Tip vještine: <span class="font-medium text-grey-700">{{ skill.skillType.name }}</span></li>
 <!--            <li class="text-gray-500">Razina vještine: <span class="font-medium text-grey-700">{{ skill.skillLevel.name }}</span></li>-->
             <li class="text-gray-500">Izvor: <span class="font-medium text-grey-700">{{ skill.source.name }}</span></li>
+          </ul>
+          <div class="container mb-4 mt-6">
+            <div class="border-bottom-das"></div>
+          </div>
+          <h3 class="font-dosis font-semibold sm:text-3xl text-3xl leading-8 transition text-cyan-500 mb-2">Obrazovni program</h3>
+          <ul class="font-roboto flex flex-col sm:items-start items-center space-y-4 text-lg list-disc sm:list-outside list-inside">
+            <li v-for="item in skill.programs" class="text-gray-500"><span class="font-normal text-grey-700">{{ item.name }}</span></li>
           </ul>
         </div>
       </div>

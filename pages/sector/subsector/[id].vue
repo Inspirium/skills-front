@@ -19,7 +19,7 @@ let t
 onMounted(() => {
   setTimeout(() => {
     t = gsap.to('.test', {
-      duration: 0.5,
+      duration: 0.35,
       opacity: 1,
       scale: 1,
       y: 0,
