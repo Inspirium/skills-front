@@ -26,7 +26,7 @@
       </p>
     </div>
     <client-only>
-      <sace/>
+      <sace />
     </client-only>
   </div>
 </template>

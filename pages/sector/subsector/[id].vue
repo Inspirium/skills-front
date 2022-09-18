@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import gsap
-  from "gsap";
+  from 'gsap'
 
 const router = useRouter()
 const route = useRoute()
@@ -124,7 +124,6 @@ onUnmounted(() => {
             </li>
           </ul>
         </div>
-
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
 import {
   Combobox,
@@ -8,7 +8,7 @@ import {
   ComboboxLabel,
   ComboboxOption,
   ComboboxOptions,
-  Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions
+  Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions,
 } from '@headlessui/vue'
 
 import fieldBasic from '@/components/fields/basic'
@@ -18,7 +18,6 @@ definePageMeta({
   layout: 'admin',
 })
 
-
 const dataFetched = ref([])
 
 const { $jsonSerializer } = useNuxtApp()
@@ -26,7 +25,7 @@ const { $jsonSerializer } = useNuxtApp()
 function loadIt() {
   useApiFetch('/api/v1/occupations', {
     params: {
-      'include': 'sector'
+      include: 'sector',
     },
   }).then((data) => {
     dataFetched.value = $jsonSerializer.deserialize('occupations', data.data.value)
@@ -58,7 +57,7 @@ const sectors = ref([])
 function loadSectors() {
   useApiFetch('/api/v1/sectors/', {
     params: {
-      'include': 'parent',
+      include: 'parent',
     },
   }).then((data) => {
     sectors.value = $jsonSerializer.deserialize('sectors', data.data.value)
@@ -71,12 +70,12 @@ const filteredSector = computed(() =>
     ? sectors.value
     : sectors.value.filter((item) => {
       return item.name.toLowerCase().includes(querySector.value.toLowerCase())
-    })
+    }),
 )
 
 const data = ref({
   name: '',
-  sector: selectedSector
+  sector: selectedSector,
 })
 
 </script>
@@ -91,29 +90,33 @@ const data = ref({
   </div>
   <div class="px-8 bg-gray-100 py-10">
     <div class="block text-gray-700 font-bold text-xl mb-2">
-      <div class="text-3xl mb-3">Zanimanje</div>
-      <input v-model="data.name" class="sm:text-lg p-3 shadow-sm focus:ring-cup-300 focus:border-cup-300 block w-full border-gray-300 border rounded-md" />
+      <div class="text-3xl mb-3">
+        Zanimanje
+      </div>
+      <input v-model="data.name" class="sm:text-lg p-3 shadow-sm focus:ring-cup-300 focus:border-cup-300 block w-full border-gray-300 border rounded-md">
     </div>
 
     <div class="grid grid-cols-2 gap-6">
-      <Combobox as="div" v-model="selectedSector" class="mt-3">
-        <ComboboxLabel class="block text-sm font-medium text-gray-700">Sektor/podsektor</ComboboxLabel>
+      <Combobox v-model="selectedSector" as="div" class="mt-3">
+        <ComboboxLabel class="block text-sm font-medium text-gray-700">
+          Sektor/podsektor
+        </ComboboxLabel>
         <div class="relative mt-1">
-          <ComboboxInput class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" @change="querySector = $event.target.value" :display-value="(sectors) => sectors.name" />
+          <ComboboxInput class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" :display-value="(sectors) => sectors.name" @change="querySector = $event.target.value" />
           <ComboboxButton class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
             <SelectorIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
           </ComboboxButton>
 
           <ComboboxOptions v-if="sectors.length > 0" class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-            <ComboboxOption v-for="person in filteredSector" :key="person.id" :value="person" as="template" v-slot="{ active, selected }">
+            <ComboboxOption v-for="person in filteredSector" :key="person.id" v-slot="{ active, selected }" :value="person" as="template">
               <li :class="['relative cursor-default select-none py-2 pl-8 pr-4', active ? 'bg-indigo-600 text-white' : 'text-gray-900']">
-            <span :class="['block truncate', selected && 'font-semibold']">
-              {{ person.name }}
-            </span>
+                <span :class="['block truncate', selected && 'font-semibold']">
+                  {{ person.name }}
+                </span>
 
                 <span v-if="selected" :class="['absolute inset-y-0 left-0 flex items-center pl-1.5', active ? 'text-white' : 'text-indigo-600']">
-              <CheckIcon class="h-5 w-5" aria-hidden="true" />
-            </span>
+                  <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                </span>
               </li>
             </ComboboxOption>
           </ComboboxOptions>
@@ -122,7 +125,9 @@ const data = ref({
     </div>
     <div class="mt-8 flex">
       <div class="inline-flex rounded-md shadow">
-        <div @click="createIt(); data.name = ''" class="cursor-pointer inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"> Spremi </div>
+        <div class="cursor-pointer inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700" @click="createIt(); data.name = ''">
+          Spremi
+        </div>
       </div>
     </div>
   </div>
@@ -137,20 +142,26 @@ const data = ref({
         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
-            <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Zanimanje</th>
-              <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Akcija</th>
-            </tr>
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Zanimanje
+                </th>
+                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Akcija
+                </th>
+              </tr>
             </thead>
             <tbody>
-            <tr v-for="(item, personIdx) in dataFetched" :key="personIdx" :class="personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {{ item.name }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <div @click="deleteIt(item.id)" class="cursor-pointer text-indigo-600 hover:text-indigo-900">Obriši</div>
-              </td>
-            </tr>
+              <tr v-for="(item, personIdx) in dataFetched" :key="personIdx" :class="personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{ item.name }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <div class="cursor-pointer text-indigo-600 hover:text-indigo-900" @click="deleteIt(item.id)">
+                    Obriši
+                  </div>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

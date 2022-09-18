@@ -1,12 +1,12 @@
 <script setup lang="ts">
 
-import {ref, watch} from 'vue'
+import { ref, watch } from 'vue'
 import { Switch } from '@headlessui/vue'
-import { connectedProposition } from '/stores/proposition'
+// import { connectedProposition } from '/stores/proposition'
 
 const emit = defineEmits(['update'])
 
-const propoStore = connectedProposition()
+// const propoStore = connectedProposition()
 const checkBox = ref(false)
 
 const props = defineProps({
@@ -24,26 +24,25 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: null,
-  }
+  },
 })
 
 const isEdit = ref(props.forEdit)
 
-watch(checkBox, newValues => {
+watch(checkBox, (newValues) => {
   emit('update', newValues)
 })
 
 function editPopulate() {
-  if (isEdit.value !== null) {
+  if (isEdit.value !== null)
     checkBox.value = isEdit.value
-  }
 }
 editPopulate()
 
 </script>
 
 <template>
-  <div @click="checkBox = !checkBox" class="sm:col-span-1 border transition duration-200 border-gray-300 p-3 flex flex-col justify-center items-center rounded-md shadow-sm" :class="checkBox ? 'bg-cup-300' : 'bg-white'">
+  <div class="sm:col-span-1 border transition duration-200 border-gray-300 p-3 flex flex-col justify-center items-center rounded-md shadow-sm" :class="checkBox ? 'bg-cup-300' : 'bg-white'" @click="checkBox = !checkBox">
     <label class="text-md font-medium -mb-1 block" :class="checkBox ? 'text-white' : 'text-gray-900'">
       {{ label }}
     </label>
@@ -63,5 +62,3 @@ editPopulate()
     </Switch>
   </div>
 </template>
-
-

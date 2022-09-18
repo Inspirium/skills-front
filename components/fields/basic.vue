@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, computed, watch} from 'vue'
+import { computed, ref, watch } from 'vue'
 
 const props = defineProps({
   label: {
@@ -26,11 +26,10 @@ const props = defineProps({
     type: [String, Number],
     required: false,
     default: '',
-  }
+  },
 })
 
 </script>
-
 
 <template>
   <div class="border-0 bg-transparent p-0">
@@ -38,8 +37,7 @@ const props = defineProps({
       {{ label }}
     </label>
     <div class="mt-1">
-      <input v-bind="$attrs" @input="$emit('update:modelValue', $event.target.value)" :value="modelValue" placeholder="" :name="name"  class="shadow-sm focus:ring-cup-300 focus:border-cup-300 block w-full border-gray-300 rounded-md" :class="[size === 'lg' ? 'sm:text-lg py-3' : 'sm:text-sm py-3']" />
+      <input v-bind="$attrs" :value="modelValue" placeholder="" :name="name" class="shadow-sm focus:ring-cup-300 focus:border-cup-300 block w-full border-gray-300 rounded-md" :class="[size === 'lg' ? 'sm:text-lg py-3' : 'sm:text-sm py-3']" @input="$emit('update:modelValue', $event.target.value)">
     </div>
   </div>
 </template>
-

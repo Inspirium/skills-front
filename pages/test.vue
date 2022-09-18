@@ -135,7 +135,7 @@ onMounted(() => {
 
 <template>
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex">
-    <div v-show="show" v-for="item in sectors" :key="item.id" class="card mr-2">
+    <div v-for="item in sectors" v-show="show" :key="item.id" class="card mr-2">
       {{ item.name }}
     </div>
   </div>

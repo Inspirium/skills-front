@@ -4,9 +4,9 @@
       <div class="w-full border-t border-dashed border-cup-500" />
     </div>
     <div class="relative flex justify-center">
-        <span class="px-6 bg-gray-50 text-3xl mt-1 mb-1 text-gray-700 font-poppins font-bold" :class="[size === 'small' ? 'text-xl text-cup-500 font-semibold' : '']">
-          {{ label }}
-        </span>
+      <span class="px-6 bg-gray-50 text-3xl mt-1 mb-1 text-gray-700 font-poppins font-bold" :class="[size === 'small' ? 'text-xl text-cup-500 font-semibold' : '']">
+        {{ label }}
+      </span>
     </div>
   </div>
 </template>
@@ -22,11 +22,7 @@ const props = defineProps({
     type: String,
     required: false,
     default: '',
-  }
+  },
 })
-
-
-
-
 
 </script>

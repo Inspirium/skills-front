@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
 import {
   Combobox,
@@ -8,7 +8,7 @@ import {
   ComboboxLabel,
   ComboboxOption,
   ComboboxOptions,
-  Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions
+  Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions,
 } from '@headlessui/vue'
 
 import fieldBasic from '@/components/fields/basic'
@@ -19,7 +19,7 @@ definePageMeta({
 })
 
 const data = ref({
-  name: ''
+  name: '',
 })
 
 const dataFetched = ref([])
@@ -65,12 +65,16 @@ function deleteIt(id) {
   </div>
   <div class="px-8 bg-gray-100 py-10">
     <div class="block text-gray-700 font-bold text-xl mb-2">
-      <div class="text-3xl mb-3">Izvor SKOMP-a</div>
-      <input v-model="data.name" class="sm:text-lg p-3 shadow-sm focus:ring-cup-300 focus:border-cup-300 block w-full border-gray-300 border rounded-md" />
+      <div class="text-3xl mb-3">
+        Izvor SKOMP-a
+      </div>
+      <input v-model="data.name" class="sm:text-lg p-3 shadow-sm focus:ring-cup-300 focus:border-cup-300 block w-full border-gray-300 border rounded-md">
     </div>
     <div class="mt-8 flex">
       <div class="inline-flex rounded-md shadow">
-        <div @click="createIt(); data.name = ''" class="cursor-pointer inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"> Spremi </div>
+        <div class="cursor-pointer inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700" @click="createIt(); data.name = ''">
+          Spremi
+        </div>
       </div>
     </div>
   </div>
@@ -85,20 +89,26 @@ function deleteIt(id) {
         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
-            <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SKOMP</th>
-              <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Akcija</th>
-            </tr>
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  SKOMP
+                </th>
+                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Akcija
+                </th>
+              </tr>
             </thead>
             <tbody>
-            <tr v-for="(item, personIdx) in dataFetched" :key="personIdx" :class="personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {{ item.name }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <div @click="deleteIt(item.id)" class="cursor-pointer text-indigo-600 hover:text-indigo-900">Obriši</div>
-              </td>
-            </tr>
+              <tr v-for="(item, personIdx) in dataFetched" :key="personIdx" :class="personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{ item.name }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <div class="cursor-pointer text-indigo-600 hover:text-indigo-900" @click="deleteIt(item.id)">
+                    Obriši
+                  </div>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

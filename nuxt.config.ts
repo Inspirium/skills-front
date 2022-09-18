@@ -2,6 +2,10 @@ import { defineNuxtConfig } from 'nuxt'
 
 export default defineNuxtConfig({
   ssr: false,
+  components: {
+    global: true,
+    dirs: ['~/components'],
+  },
   meta: {
     title: 'Katalog digitalnih i zelenih vještina - HZZ.hr',
     description: 'Katalog digitalnih i zelenih vještina',
@@ -14,7 +18,6 @@ export default defineNuxtConfig({
   },
   buildModules: [
     '@vueuse/nuxt',
-    '@pinia/nuxt',
     '@nuxtjs/tailwindcss',
   ],
   build: {
@@ -26,9 +29,6 @@ export default defineNuxtConfig({
       '@fortawesome/free-solid-svg-icons',
       '@fortawesome/vue-fontawesome',
     ],
-  },
-  vueuse: {
-    ssrHandlers: true,
   },
   publicRuntimeConfig: {
     URL: process.env.BASE_URL,

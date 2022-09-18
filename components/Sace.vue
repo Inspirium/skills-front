@@ -56,18 +56,18 @@ const lineBreak = computed(() => {
       </h3>
       <font-awesome-icon class="absolute hex-icon w-10 h-10 " :color="hover !== index ? `#${item.color}` : '#ffffff'" :icon="item.icon" />
       <svg
-          class="dropshadow z-20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-          width="270px" height="240px" viewBox="0 0 141.74 162.98" xml:space="preserve"
+        class="dropshadow z-20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        width="270px" height="240px" viewBox="0 0 141.74 162.98" xml:space="preserve"
       >
-          <polygon
-              fill-rule="evenodd" clip-rule="evenodd" :fill="hover === index ? `#${item.color}` : '#ffffff'" class="text-grey-700 transition duration-500" points="141.74,40.62 71.21,0 0,40.87 0,122.36 71.21,162.98
+        <polygon
+          fill-rule="evenodd" clip-rule="evenodd" :fill="hover === index ? `#${item.color}` : '#ffffff'" class="text-grey-700 transition duration-500" points="141.74,40.62 71.21,0 0,40.87 0,122.36 71.21,162.98
           141.74,122.12 "
-          />
+        />
         <path
-            fill-rule="evenodd" clip-rule="evenodd" :fill="`#${item.color}`" d="M141.74,40.62L71.21,0L0,40.87v81.49l71.21,40.62l70.53-40.86
+          fill-rule="evenodd" clip-rule="evenodd" :fill="`#${item.color}`" d="M141.74,40.62L71.21,0L0,40.87v81.49l71.21,40.62l70.53-40.86
           V40.62z M71.21,4.44l67.06,38.64v77.46l-67.06,38.87L3.48,120.77V43.31L71.21,4.44z"
         />
-        </svg>
+      </svg>
     </div>
   </div>
   <div v-if="lineBreak <= 2" class="flex flex-col mt-12">
@@ -75,18 +75,18 @@ const lineBreak = computed(() => {
       <div class="w-[100px] flex justify-center items-center">
         <font-awesome-icon class="absolute z-10 w-10 h-10 z-50" :color="hover !== index ? `#${item.color}` : '#ffffff'" :icon="item.icon" />
         <svg
-            class="dropshadow z-20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            width="100px" height="120px" viewBox="0 0 141.74 162.98" xml:space="preserve"
+          class="dropshadow z-20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="100px" height="120px" viewBox="0 0 141.74 162.98" xml:space="preserve"
         >
-            <polygon
-                fill-rule="evenodd" clip-rule="evenodd" :fill="hover === index ? `#${item.color}` : '#ffffff'" class="text-grey-700 transition duration-500" points="141.74,40.62 71.21,0 0,40.87 0,122.36 71.21,162.98
+          <polygon
+            fill-rule="evenodd" clip-rule="evenodd" :fill="hover === index ? `#${item.color}` : '#ffffff'" class="text-grey-700 transition duration-500" points="141.74,40.62 71.21,0 0,40.87 0,122.36 71.21,162.98
           141.74,122.12 "
-            />
+          />
           <path
-              fill-rule="evenodd" clip-rule="evenodd" :fill="`#${item.color}`" d="M141.74,40.62L71.21,0L0,40.87v81.49l71.21,40.62l70.53-40.86
+            fill-rule="evenodd" clip-rule="evenodd" :fill="`#${item.color}`" d="M141.74,40.62L71.21,0L0,40.87v81.49l71.21,40.62l70.53-40.86
           V40.62z M71.21,4.44l67.06,38.64v77.46l-67.06,38.87L3.48,120.77V43.31L71.21,4.44z"
           />
-          </svg>
+        </svg>
       </div>
       <h3 class="z-10 font-roboto font-medium text-lg text-gray-800 leading-6 transition ml-4">
         {{ item.name }}
