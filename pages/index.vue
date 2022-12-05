@@ -19,7 +19,7 @@ const sectors = await $fetch('/api/v1/sectors', {
   params: {
     'filter[parent]': false,
   },
-  baseURL: config.URL,
+  baseURL: config.public.URL,
   headers: {
     // 'Authorization': `Bearer ${userStore.token}`,
     'Content-Type': 'application/vnd.api+json',
