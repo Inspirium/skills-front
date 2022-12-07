@@ -127,3 +127,11 @@ label {
 .v-leave-to {
     opacity: 0;
 }
+
+.count-enter-active, .count-leave-active {
+    transition: all 1s;
+}
+.count-enter, .count-leave-to {
+    transform: translateX(30px);
+    opacity: 0;
+}

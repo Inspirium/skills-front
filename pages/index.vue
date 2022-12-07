@@ -28,6 +28,40 @@ const sectors = await $fetch('/api/v1/sectors', {
   parseResponse: txt => $jsonSerializer.deserialize('sectors', JSON.parse(txt)),
 })
 
+let currentNumber = ref(0)
+let totalGreen = ref(500)
+let totalDigital = ref(null)
+
+function loadItTotalGreen() {
+  useApiFetch('/api/v1/skill-types', {
+    params: {
+      'withCount': 'skills',
+      'filter[name]': 'Zelena',
+    }
+  }).then((data) => {
+    totalGreen.value = data.data[0].relationships.skills.meta.count
+    animateNumber()
+  })
+}
+function loadItTotalDigital() {
+  useApiFetch('/api/v1/skill-types', {
+    params: {
+      'withCount': 'skills',
+      'filter[name]': 'Digitalna',
+    }
+  }).then((data) => {
+    totalDigital.value = data.data[0].relationships.skills.meta.count
+  })
+}
+loadItTotalGreen()
+loadItTotalDigital()
+
+function animateNumber() {
+  setInterval(() => {
+    currentNumber.value = totalGreen.value;
+  }, 1000);
+}
+
 onMounted(() => {
   setTimeout(() => {
     t = gsap.to('.sace', {
@@ -61,6 +95,16 @@ const lineBreak = computed(() => {
 })
 </script>
 
+<style>
+.count-enter-active, .count-leave-active {
+  transition: all 1s;
+}
+.count-enter, .count-leave-to {
+  transform: translateX(30px);
+  opacity: 0;
+}
+</style>
+
 <template>
   <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 pb-40">
     <div class="md:flex justify-between sm:space-x-20 md:mt-12 md:items-center">
@@ -73,10 +117,10 @@ const lineBreak = computed(() => {
             Prikaži izdvojeno:
           </h2>
           <NuxtLink class="text-white mr-3 md:mr-0 inline-block rounded-lg bg-cyan-500 sm:px-2 px-4 sm:py-1 py-2 font-semibold cursor-pointer hover:scale-110 hover:shadow-xl transition" to="/sector/digital">
-            Digitalne vještine
+            Digitalne vještine <span>({{ totalDigital }})</span>
           </NuxtLink>
           <NuxtLink class="text-white inline-block rounded-lg bg-lime-500 sm:px-2 px-4 sm:py-1 py-2 font-semibold cursor-pointer hover:scale-110 hover:shadow-xl transition" to="/sector/green">
-            Zelene vještine
+            Zelene vještine <transition easing="ease-in-out"><span>({{ totalGreen }})</span></transition>
           </NuxtLink>
         </div>
       </div>
@@ -126,8 +170,7 @@ const lineBreak = computed(() => {
         </svg>
           </div>
           <h3 class="z-10 font-roboto font-medium text-lg text-gray-800 leading-6 transition ml-4">
-            {{ item.name }}
-          </h3>
+            {{ item.name }}          </h3>
         </div>
       </div>
     </div>
