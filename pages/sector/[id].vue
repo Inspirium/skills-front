@@ -23,7 +23,7 @@ function source(item) {
     case 1:
       return 'Registar HKO'
     case 2:
-      return 'Registar HKO'
+      return 'ESCO'
   }
 }
 

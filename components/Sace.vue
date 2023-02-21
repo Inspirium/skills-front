@@ -18,7 +18,6 @@ const { data: sectors } = await useApiFetch('/api/v1/sectors', {
 })
 
 if (sectors) {
-
   onMounted(() => {
     t = gsap.to('.sace', {
       duration: 0.2,

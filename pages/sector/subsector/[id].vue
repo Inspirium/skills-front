@@ -8,16 +8,35 @@ const route = useRoute()
 
 const { $jsonSerializer } = useNuxtApp()
 
-const sectors  = await useApiFetch(`/api/v1/sectors/${route.params.id}`, {
-  params: {
-    include: 'subsectors,parent',
-    with: 'skills',
+const selectedSource = ref(1)
+const selectedSourceTemp = ref(true)
+const sectors = ref([])
+sectors.value = await getSectors()
+
+watch (selectedSource,
+  async (val) => {
+    sectors.value = await getSectors()
+    showSkills()
   },
-  parseResponse: txt => $jsonSerializer.deserialize('sectors', JSON.parse(txt)),
-})
+)
+
+async function getSectors(): Promise<Array> {
+  return await useApiFetch(`/api/v1/sectors/${route.params.id}`, {
+    params: {
+      'include': 'subsectors,parent',
+      'with': 'skills',
+      'filter[source]': selectedSource.value,
+    },
+    parseResponse: txt => $jsonSerializer.deserialize('sectors', JSON.parse(txt)),
+  })
+}
 
 let t
 onMounted(() => {
+  showSkills()
+})
+
+function showSkills() {
   setTimeout(() => {
     t = gsap.to('.test', {
       duration: 0.35,
@@ -31,28 +50,24 @@ onMounted(() => {
       },
     })
   }, 200)
-})
+}
 function source(item) {
   switch (item) {
     case 1:
       return 'Registar HKO'
     case 2:
-      return 'Registar HKO'
+      return 'ESCO'
   }
 }
 onUnmounted(() => {
   if (t)
     t.kill()
 })
-
-const selectedSource = ref(1)
-const selectedSourceTemp = ref(true)
-
 </script>
 
 <template>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!--    <font-awesome-icon icon="tree"></font-awesome-icon>-->
+    <!--    <font-awesome-icon icon="tree"></font-awesome-icon> -->
     <div class="flex justify-between sm:flex-row flex-col text-grey-700 sm:items-end items-start mt-6">
       <div class="block sm:hidden mx-auto">
         <div class="relative flex cursor-pointer self-start group" @click="router.back()">
@@ -77,8 +92,8 @@ const selectedSourceTemp = ref(true)
         <h1 class="font-semibold sm:text-[5rem] text-[2.5rem] font-dosis fly-in mb-4">
           Vještine
         </h1>
-        <!--        <p class="max-w-xl sm:text-right "><span :style="`color:#${sectors.parent.color}`" class="font-bold text-2xl font-dosis">{{ sectors.name }} </span> prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale.-->
-        <!--        </p>-->
+        <!--        <p class="max-w-xl sm:text-right "><span :style="`color:#${sectors.parent.color}`" class="font-bold text-2xl font-dosis">{{ sectors.name }} </span> prikazuju grupe sličnih specijalističkih zadataka. Specijalistički zadaci osmišljeni su tako da opisuju svakodnevni rad unutar zanimanja. Ovi zadaci su uglavnom prenosivi – ako možete obaviti jedan zadatak u klasteru, možete obaviti i ostale. -->
+        <!--        </p> -->
       </div>
     </div>
     <div class="flex sm:mt-12 mt-6 mb-20">
@@ -106,20 +121,22 @@ const selectedSourceTemp = ref(true)
           <h2 class="font-semibold  text-gray-600 text-2xl md:text-2xl font-dosis md:mt-6">
             Odaberi izvor vještina:
           </h2>
-          <NuxtLink @click="selectedSource = 1; selectedSourceTemp = true" :class="[selectedSource === 1 ? 'text-white bg-gray-400' : 'text-gray-500' ]" class="sm:text-2xl mr-3 md:mr-0 inline-block rounded-lg sm:px-2 px-4 sm:py-1 py-2 font-normal uppercase cursor-pointer hover:scale-100 hover:shadow-xl transition" >
+          <NuxtLink :class="[selectedSource === 1 ? 'text-white bg-gray-400' : 'text-gray-500']" class="sm:text-2xl mr-3 md:mr-0 inline-block rounded-lg sm:px-2 px-4 sm:py-1 py-2 font-normal uppercase cursor-pointer hover:scale-100 hover:shadow-xl transition" @click="selectedSource = 1; selectedSourceTemp = true">
             Registar HKO
           </NuxtLink>
-          <NuxtLink @click="selectedSource = 2; selectedSourceTemp = false" :class="[selectedSource === 2 ? 'text-white bg-gray-400' : 'text-gray-500' ]" class="sm:text-2xl mr-3 md:mr-0 inline-block rounded-lg sm:px-2 px-4 sm:py-1 py-2 font-normal uppercase cursor-pointer hover:scale-100 hover:shadow-xl transition">
+          <NuxtLink :class="[selectedSource === 2 ? 'text-white bg-gray-400' : 'text-gray-500']" class="sm:text-2xl mr-3 md:mr-0 inline-block rounded-lg sm:px-2 px-4 sm:py-1 py-2 font-normal uppercase cursor-pointer hover:scale-100 hover:shadow-xl transition" @click="selectedSource = 2; selectedSourceTemp = false">
             Ostalo
           </NuxtLink>
         </div>
 
-        <div v-show="selectedSourceTemp" >
-          <div v-for="(item, index) in sectors.skills" :key="index"
-               class="font-dosis sm:ml-16 cursor-pointer group test opacity-0 scale-0 translate-y-[200px]"
-               @click="router.push(`/sector/skill/${item.id}`)">
+        <div v-if="sectors.skills.length" :key="selectedSource">
+          <div
+            v-for="(item, index) in sectors.skills" :key="index"
+            class="font-dosis sm:ml-16 cursor-pointer group test opacity-0 scale-0 translate-y-[200px]"
+            @click="router.push(`/sector/skill/${item.id}`)"
+          >
             <div v-if="index !== 0" class="container mt-2">
-              <div class="border-bottom-das"/>
+              <div class="border-bottom-das" />
             </div>
             <h2 class="text-2xl sm:text-3xl font-semibold pt-3 group-hover:scale-105 origin-left transition text-gray-800">
               {{ item.name }}
@@ -128,8 +145,10 @@ const selectedSourceTemp = ref(true)
               <h3 class="sm:text-lg text-lg font-normal py-1 sm:py-2 text-grey-700">
                 <span class="font-semibold uppercase text-base">Izvor: </span>{{ source(item.source_id) }}
               </h3>
-              <h3 class="text-sm font-normal px-2 py-[1px] whitespace-nowrap rounded-md text-white uppercase"
-                  :class="item.skill_type_id === 1 ? 'bg-lime-600' : 'bg-cyan-500'">
+              <h3
+                class="text-sm font-normal px-2 py-[1px] whitespace-nowrap rounded-md text-white uppercase"
+                :class="item.skill_type_id === 1 ? 'bg-lime-600' : 'bg-cyan-500'"
+              >
                 {{ item.skill_type_id === 1 ? 'Zelena' : 'Digitalna' }} vještina
               </h3>
             </div>
@@ -147,7 +166,7 @@ const selectedSourceTemp = ref(true)
           </div>
         </div>
 
-        <div v-if="!selectedSourceTemp" class="flex flex-col items-center justify-center">
+        <div v-else class="flex flex-col items-center justify-center">
           <font-awesome-icon class="w-14 h-14 " :color="`#${sectors.parent.color}`" icon="circle-exclamation" />
           <h2 class="font-semibold  text-gray-600 text-2xl md:text-2xl font-dosis md:mt-2">
             Nema podataka za odabrani izvor
