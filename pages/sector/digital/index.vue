@@ -21,8 +21,6 @@ async function getDataSearch(term) {
     params: {
       'filter[skillType]': 'Digitalna',
       'filter[name]': term.value,
-      'filter[withCount]': true,
-      'include': 'withCount',
       'include': 'source',
     },
   }).then((data) => {
