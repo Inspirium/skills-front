@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import gsap from 'gsap'
 import { useWindowSize } from '@vueuse/core'
-import useApiFetch
-  from '~/composables/useApiFetch'
 import {
   nextTick,
-  onUpdated
-} from "vue";
+  onUpdated,
+} from 'vue'
+import useApiFetch
+  from '~/composables/useApiFetch'
 const config = useRuntimeConfig()
 
 const { $jsonSerializer } = useNuxtApp()
@@ -28,29 +28,27 @@ const sectors = await $fetch('/api/v1/sectors', {
   parseResponse: txt => $jsonSerializer.deserialize('sectors', JSON.parse(txt)),
 })
 
-let currentNumber = ref(0)
-let totalGreen = ref(500)
-let totalDigital = ref(null)
+const currentNumber = ref(0)
+const totalGreen = ref(0)
+const totalDigital = ref(null)
 
 function loadItTotalGreen() {
-  useApiFetch('/api/v1/skill-types', {
+  useApiFetch('/api/v1/skills/count', {
     params: {
-      'withCount': 'skills',
-      'filter[name]': 'Zelena',
-    }
+      skill_type: 1,
+    },
   }).then((data) => {
-    totalGreen.value = data.data[0].relationships.skills.meta.count
+    totalGreen.value = data
     animateNumber()
   })
 }
 function loadItTotalDigital() {
-  useApiFetch('/api/v1/skill-types', {
+  useApiFetch('/api/v1/skills/count', {
     params: {
-      'withCount': 'skills',
-      'filter[name]': 'Digitalna',
-    }
+      skill_type: 2,
+    },
   }).then((data) => {
-    totalDigital.value = data.data[0].relationships.skills.meta.count
+    totalDigital.value = data
   })
 }
 loadItTotalGreen()
@@ -58,8 +56,8 @@ loadItTotalDigital()
 
 function animateNumber() {
   setInterval(() => {
-    currentNumber.value = totalGreen.value;
-  }, 1000);
+    currentNumber.value = totalGreen.value
+  }, 1000)
 }
 
 onMounted(() => {
@@ -75,7 +73,7 @@ onMounted(() => {
   }, 500)
 })
 onUnmounted(() => {
-  //t.kill()
+  // t.kill()
 })
 const lineBreak = computed(() => {
   let b
@@ -95,16 +93,6 @@ const lineBreak = computed(() => {
 })
 </script>
 
-<style>
-.count-enter-active, .count-leave-active {
-  transition: all 1s;
-}
-.count-enter, .count-leave-to {
-  transform: translateX(30px);
-  opacity: 0;
-}
-</style>
-
 <template>
   <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 pb-40">
     <div class="md:flex justify-between sm:space-x-20 md:mt-12 md:items-center">
@@ -120,7 +108,9 @@ const lineBreak = computed(() => {
             Digitalne vještine <span>({{ totalDigital }})</span>
           </NuxtLink>
           <NuxtLink class="text-white inline-block rounded-lg bg-lime-500 sm:px-2 px-4 sm:py-1 py-2 font-semibold cursor-pointer hover:scale-110 hover:shadow-xl transition" to="/sector/green">
-            Zelene vještine <transition easing="ease-in-out"><span>({{ totalGreen }})</span></transition>
+            Zelene vještine <transition easing="ease-in-out">
+              <span>({{ totalGreen }})</span>
+            </transition>
           </NuxtLink>
         </div>
       </div>
@@ -137,18 +127,18 @@ const lineBreak = computed(() => {
           </h3>
           <font-awesome-icon v-if="item.color" class="absolute hex-icon w-10 h-10 " :color="hover !== index ? `#${item.color}` : '#ffffff'" :icon="item.icon" />
           <svg
-              class="dropshadow z-20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-              width="270px" height="240px" viewBox="0 0 141.74 162.98" xml:space="preserve"
+            class="dropshadow z-20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            width="270px" height="240px" viewBox="0 0 141.74 162.98" xml:space="preserve"
           >
-        <polygon
-            fill-rule="evenodd" clip-rule="evenodd" :fill="hover === index ? `#${item.color}` : '#ffffff'" class="text-grey-700 transition duration-500" points="141.74,40.62 71.21,0 0,40.87 0,122.36 71.21,162.98
+            <polygon
+              fill-rule="evenodd" clip-rule="evenodd" :fill="hover === index ? `#${item.color}` : '#ffffff'" class="text-grey-700 transition duration-500" points="141.74,40.62 71.21,0 0,40.87 0,122.36 71.21,162.98
           141.74,122.12 "
-        />
+            />
             <path
-                fill-rule="evenodd" clip-rule="evenodd" :fill="`#${item.color}`" d="M141.74,40.62L71.21,0L0,40.87v81.49l71.21,40.62l70.53-40.86
+              fill-rule="evenodd" clip-rule="evenodd" :fill="`#${item.color}`" d="M141.74,40.62L71.21,0L0,40.87v81.49l71.21,40.62l70.53-40.86
           V40.62z M71.21,4.44l67.06,38.64v77.46l-67.06,38.87L3.48,120.77V43.31L71.21,4.44z"
             />
-      </svg>
+          </svg>
         </div>
       </div>
       <div v-if="lineBreak <= 2" class="flex flex-col mt-12">
@@ -156,23 +146,34 @@ const lineBreak = computed(() => {
           <div class="w-[100px] flex justify-center items-center">
             <font-awesome-icon class="absolute z-10 w-10 h-10 z-50" :color="hover !== index ? `#${item.color}` : '#ffffff'" :icon="item.icon" />
             <svg
-                class="dropshadow z-20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                width="100px" height="120px" viewBox="0 0 141.74 162.98" xml:space="preserve"
+              class="dropshadow z-20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              width="100px" height="120px" viewBox="0 0 141.74 162.98" xml:space="preserve"
             >
-          <polygon
-              fill-rule="evenodd" clip-rule="evenodd" :fill="hover === index ? `#${item.color}` : '#ffffff'" class="text-grey-700 transition duration-500" points="141.74,40.62 71.21,0 0,40.87 0,122.36 71.21,162.98
+              <polygon
+                fill-rule="evenodd" clip-rule="evenodd" :fill="hover === index ? `#${item.color}` : '#ffffff'" class="text-grey-700 transition duration-500" points="141.74,40.62 71.21,0 0,40.87 0,122.36 71.21,162.98
           141.74,122.12 "
-          />
+              />
               <path
-                  fill-rule="evenodd" clip-rule="evenodd" :fill="`#${item.color}`" d="M141.74,40.62L71.21,0L0,40.87v81.49l71.21,40.62l70.53-40.86
+                fill-rule="evenodd" clip-rule="evenodd" :fill="`#${item.color}`" d="M141.74,40.62L71.21,0L0,40.87v81.49l71.21,40.62l70.53-40.86
           V40.62z M71.21,4.44l67.06,38.64v77.46l-67.06,38.87L3.48,120.77V43.31L71.21,4.44z"
               />
-        </svg>
+            </svg>
           </div>
           <h3 class="z-10 font-roboto font-medium text-lg text-gray-800 leading-6 transition ml-4">
-            {{ item.name }}          </h3>
+            {{ item.name }}
+          </h3>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<style>
+.count-enter-active, .count-leave-active {
+  transition: all 1s;
+}
+.count-enter, .count-leave-to {
+  transform: translateX(30px);
+  opacity: 0;
+}
+</style>
