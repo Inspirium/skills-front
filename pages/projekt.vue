@@ -18,19 +18,20 @@
     </div>
     <div class="max-w-xl text-left mx-auto">
       <p class="mt-10">
-        Ministarstvo rada, mirovinskoga sustava, obitelji i socijalne politike (MROSP) tijekom 2022. godine započelo je s provedbom sustava vaučera, čiji je cilj omogućiti veće sudjelovanje nezaposlenih i zaposlenih osoba u cjeloživotnom obrazovanju s naglaskom na stjecanju vještina povezanih sa <NuxtLink to="/" class="font-bold text-lime-500">
+        Ministarstvo rada, mirovinskoga sustava, obitelji i socijalne politike (MROSP) tijekom 2022. godine započelo je s provedbom sustava vaučera, čiji je cilj omogućiti veće sudjelovanje nezaposlenih i zaposlenih osoba u cjeloživotnom obrazovanju s naglaskom na stjecanju vještina povezanih sa <NuxtLink to="/" class="font-bold text-lime-500">
           zelenom
         </NuxtLink> i <NuxtLink to="/" class="font-bold text-cyan-500">
           digitalnom
-        </NuxtLink> tranzicijom. Kako bi se detektiralo koji su to obrazovni programi prihvatljivi za dodjelu vaučera, odnosno stjecanje kojih vještina će se financirati kao odgovor na potrebe tržišta rada, u prvom koraku proveden je postupak inicijalnog mapiranja vještina upisanih u Registar HKO sukladno usuglašenoj metodologiji te je kao finalni rezultat izrađen katalog vještina potrebnih za digitalnu i zelenu transformaciju/tranziciju gospodarstva. U drugom koraku Katalog se kontinuirano nadopunjuje novoupisanim zelenim i digitalnim vještinama iz Registra HKO te zelenim i digitalnim vještinama iz vanjskih baza vještina kao što su ESCO, O*NET, CEDEFOP, Canadian Skills and Knowledge Checklist i slično. U trećem koraku u Katalog će biti uključene nove zelene i digitalne vještine dobivene kontinuiranim pregledom oglasa za poslove.
+        </NuxtLink> Kako bi se detektiralo koji su to obrazovni programi prihvatljivi za dodjelu vaučera, odnosno stjecanje kojih vještina će se financirati kao odgovor na potrebe tržišta rada, u prvom koraku proveden je postupak inicijalnog mapiranja vještina upisanih u Registar HKO sukladno usuglašenoj metodologiji te je kao finalni rezultat izrađen katalog vještina potrebnih za digitalnu i zelenu transformaciju/tranziciju gospodarstva. U drugom koraku Katalog se kontinuirano nadopunjuje novoupisanim zelenim i digitalnim vještinama iz Registra HKO te zelenim i digitalnim vještinama iz ESCO (European Skills, Competences, Qualifications and Occupations) europska baza podataka koja se koristi za opisivanje i usklađivanje kvalifikacija, kompetencija i zanimanja na europskoj razini.
       </p>
       <p class="mt-4">
-        Katalog zelenih i digitalnih vještina omogućuje MROSP-u detekciju vještina potrebnih za rad unutar postojećih sektora i podsektora Hrvatskog kvalifikacijskog okvira posebno u kontekstu zelenih i digitalnih tranzicija ključnih za povećanje zapošljivosti, ali i osiguranje postojeće zapošljivosti i prevenciju porasta broja nezaposlenih.
+        Katalog zelenih i digitalnih vještina omogućuje MROSP-u detekciju vještina potrebnih za rad unutar postojećih sektora i podsektora Hrvatskog kvalifikacijskog okvira posebno u kontekstu zelenih i digitalnih tranzicija ključnih za povećanje zapošljivosti, ali i osiguranje postojeće zapošljivosti i prevenciju porasta broja nezaposlenih.
       </p>
       <p class="mt-4">
-        Do popisa zelenih i digitalnih  vještine u na <NuxtLink to="/" class="font-bold text-cyan-500">
+        Do popisa zelenih i digitalnih vještine u na <NuxtLink to="/" class="font-bold text-cyan-500">
           Početnoj stranici Kataloga
-        </NuxtLink> dolazi se na dva načina: (i) kroz odabir željenog sektora i podsektora ili (ii) kroz odabir jedne od ikona Digitalne vještine/Zelene vještine. U prvom slučaju prikazuje se lista zelenih i digitalnih vještina u pojedinom podsektoru, a u drugom lista svih zelenih ili digitalnih vještina trenutno upisanih u Katalog. Odabirom pojedine vještine prikazuju se specifični podaci o vještini kao što su tip, izvor te njena veza s pojedinim standardima zanimanja upisanih u Registar HKO.
+        </NuxtLink> dolazi se na dva načina: (i) kroz odabir željenog sektora i podsektora ili (ii) kroz odabir jedne od ikona Digitalne vještine/Zelene vještine. U prvom slučaju prikazuje se lista zelenih i digitalnih vještina u pojedinom podsektoru, a u drugom lista svih zelenih ili digitalnih vještina trenutno upisanih u Katalog. Odabirom pojedine vještine prikazuju se specifični podaci o vještini kao što su tip i izvor.  Dodatno, vještine koje kao izvor imaju naveden Registar HKO kao dodatnu specifikaciju imaju poveznicu s pojedinim standardima zanimanja upisanih u Registar HKO te vezu s postojećim programom za obrazovanje odraslih za koji se može dobiti vaučer. S druge strane, vještine čiji je izvor ESCO baza kao dodatnu specifikaciju imaju opis vještine i primarno služe za pisanje novih standarda zanimanja ili SKOMP-ova koje će biti zeleni i/ili digitalni.
+
       </p>
     </div>
   </div>
