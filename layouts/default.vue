@@ -80,7 +80,7 @@ const navigation = [
       </DisclosurePanel>
     </Disclosure>
     <div class="h-full min-h-[calc(100vh-16.3rem)]">
-      <NuxtPage></NuxtPage>
+      <slot></slot>
     </div>
     <Footer></Footer>
   </div>

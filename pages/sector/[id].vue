@@ -1,14 +1,11 @@
 <script setup lang="ts">
 
 import { ref } from 'vue'
-import useApiFetch
-  from '~/composables/useApiFetch'
 
 const router = useRouter()
 const route = useRoute()
 
 const { $jsonSerializer } = useNuxtApp()
-
 const sectors = await useApiFetch(`/api/v1/sectors/${route.params.id}`, {
     params: {
       include: 'subsectors',

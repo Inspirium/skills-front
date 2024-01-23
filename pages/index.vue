@@ -1,12 +1,6 @@
 <script setup lang="ts">
 import gsap from 'gsap'
 import { useWindowSize } from '@vueuse/core'
-import {
-  nextTick,
-  onUpdated,
-} from 'vue'
-import useApiFetch
-  from '~/composables/useApiFetch'
 const config = useRuntimeConfig()
 
 const { $jsonSerializer } = useNuxtApp()
